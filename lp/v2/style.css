@@ -1,0 +1,125 @@
+/* ── CSS変数 ── */
+:root {
+  --green-deep:    #1b5e20;
+  --green-forest:  #2e7d32;
+  --green-vivid:   #43a047;
+  --green-light:   #66bb6a;
+  --green-pale:    #c8e6c9;
+  --green-softest: #e8f5e9;
+  --bg-page:       #f0f7f1;
+  --text-main:     #222222;
+  --text-sub:      #555555;
+  --text-muted:    #888888;
+  --glass-bg:      rgba(255,255,255,0.52);
+  --glass-border:  rgba(255,255,255,0.82);
+  --glass-blur:    blur(14px);
+  --radius-card:   20px;
+  --radius-btn:    36px;
+  --shadow-card:   0 6px 28px rgba(0,0,0,0.07);
+  --shadow-btn:    0 8px 28px rgba(27,94,32,0.38);
+}
+
+/* ── リセット ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; border: none; }
+
+/* ── グラスカード ── */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+/* ── セクション共通ラッパー ── */
+.section {
+  padding: 64px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.section--green {
+  background: linear-gradient(160deg, var(--green-softest) 0%, #dcedc8 60%, var(--green-pale) 100%);
+}
+
+/* ── セクションラベル / タイトル ── */
+.sec-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--green-vivid);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.sec-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--green-deep);
+  text-align: center;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.sec-line {
+  width: 28px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green-vivid), var(--green-light));
+  border-radius: 2px;
+  margin: 0 auto 28px;
+}
+.sec-desc {
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.9;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+/* ── ボタン ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--green-deep), var(--green-forest));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 14px 28px;
+  border-radius: var(--radius-btn);
+  box-shadow: var(--shadow-btn);
+  border: none;
+  white-space: nowrap;
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--green-forest);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: 32px;
+  border: 1.5px solid rgba(46,125,50,0.3);
+  white-space: nowrap;
+}
+
+/* ── 装飾円（セクション背景） ── */
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}

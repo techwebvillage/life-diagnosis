@@ -1,0 +1,65 @@
+<h2>画面フロー</h2>
+<p class="subtitle">診断アプリの画面遷移。既存 life-village Next.js アプリに追加するルート構成。</p>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:640px;margin:0 auto;">
+
+  <!-- Step 1 -->
+  <div style="display:flex;align-items:stretch;gap:12px;">
+    <div style="display:flex;flex-direction:column;align-items:center;min-width:40px;">
+      <div style="width:36px;height:36px;background:linear-gradient(135deg,#1b5e20,#2e7d32);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:14px;flex-shrink:0;">1</div>
+      <div style="width:2px;flex:1;background:linear-gradient(to bottom,#2e7d32,#43a047);margin:4px 0;"></div>
+    </div>
+    <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(27,94,32,0.15);border-radius:12px;padding:14px 16px;flex:1;">
+      <div style="font-size:11px;color:#43a047;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;">TOP PAGE — /diagnosis</div>
+      <div style="font-size:14px;font-weight:700;color:#1b5e20;margin-bottom:4px;">「あなたに合った保険がわかる」</div>
+      <div style="font-size:12px;color:#555;">診断の説明・所要時間（約1分）・診断スタートボタン</div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div style="display:flex;align-items:stretch;gap:12px;">
+    <div style="display:flex;flex-direction:column;align-items:center;min-width:40px;">
+      <div style="width:36px;height:36px;background:linear-gradient(135deg,#1b5e20,#2e7d32);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:14px;flex-shrink:0;">2</div>
+      <div style="width:2px;flex:1;background:linear-gradient(to bottom,#43a047,#66bb6a);margin:4px 0;"></div>
+    </div>
+    <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(27,94,32,0.15);border-radius:12px;padding:14px 16px;flex:1;">
+      <div style="font-size:11px;color:#43a047;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;">QUIZ — /diagnosis/quiz</div>
+      <div style="font-size:14px;font-weight:700;color:#1b5e20;margin-bottom:4px;">7問の質問（4択）</div>
+      <div style="font-size:12px;color:#555;">進捗バー付き・1画面1問・タップで次の問題へ</div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div style="display:flex;align-items:stretch;gap:12px;">
+    <div style="display:flex;flex-direction:column;align-items:center;min-width:40px;">
+      <div style="width:36px;height:36px;background:linear-gradient(135deg,#1b5e20,#2e7d32);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:14px;flex-shrink:0;">3</div>
+      <div style="width:2px;flex:1;background:linear-gradient(to bottom,#66bb6a,#a5d6a7);margin:4px 0;"></div>
+    </div>
+    <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(27,94,32,0.15);border-radius:12px;padding:14px 16px;flex:1;">
+      <div style="font-size:11px;color:#43a047;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;">PREVIEW — /diagnosis/preview</div>
+      <div style="font-size:14px;font-weight:700;color:#1b5e20;margin-bottom:4px;">「診断中...」＋LINE誘導</div>
+      <div style="font-size:12px;color:#555;">スコア計算・sessionStorageに保存・LINEで詳細結果を受け取るCTA</div>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div style="display:flex;align-items:stretch;gap:12px;">
+    <div style="display:flex;flex-direction:column;align-items:center;min-width:40px;">
+      <div style="width:36px;height:36px;background:linear-gradient(135deg,#43a047,#66bb6a);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:14px;flex-shrink:0;">4</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(232,245,233,0.9),rgba(200,230,201,0.9));border:1px solid rgba(27,94,32,0.2);border-radius:12px;padding:14px 16px;flex:1;">
+      <div style="font-size:11px;color:#43a047;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;">RESULT — /diagnosis/result?type=M|L|F</div>
+      <div style="font-size:14px;font-weight:700;color:#1b5e20;margin-bottom:4px;">診断結果（3タイプ）</div>
+      <div style="font-size:12px;color:#555;">タイプ名・リスク可視化・CTA（無料相談 + LINE）</div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <div style="flex:1;background:linear-gradient(135deg,#1b5e20,#2e7d32);border-radius:8px;padding:7px;text-align:center;font-size:10px;color:white;font-weight:700;">無料相談する →</div>
+        <div style="flex:1;border:1.5px solid #2e7d32;border-radius:8px;padding:7px;text-align:center;font-size:10px;color:#2e7d32;font-weight:700;">LINEで受け取る</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:24px;background:rgba(232,245,233,0.6);border-radius:12px;padding:14px 16px;font-size:12px;color:#555;">
+  <strong style="color:#1b5e20;">LINEからのアクセス：</strong> LINE経由で <code>/diagnosis/result?type=M</code> 等に直接遷移。sessionStorageなしでもタイプパラメータから結果を表示できる。
+</div>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Village LP v2 — Full Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="/helper.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  background: #f0f7f1;
+  color: #222;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(165,214,167,0.35);
+  padding: 13px 20px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.nav-logo { font-size: 17px; font-weight: 900; color: #1b5e20; letter-spacing: 0.5px; }
+.nav-logo span { color: #43a047; }
+.nav-cta {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: #fff; font-size: 11px; font-weight: 700;
+  padding: 9px 18px; border-radius: 24px; border: none; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(46,125,50,0.32);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative; overflow: hidden;
+  background: #fff;
+  min-height: 520px;
+  padding: 48px 24px 56px;
+}
+/* Large organic blobs */
+.blob {
+  position: absolute; z-index: 0;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+.blob-1 {
+  top: -80px; right: -60px;
+  width: 320px; height: 340px;
+  background: linear-gradient(145deg, #b2dfdb 0%, #a5d6a7 50%, #81c784 100%);
+  opacity: 0.9;
+  border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
+}
+.blob-2 {
+  bottom: -60px; right: -10px;
+  width: 180px; height: 200px;
+  background: linear-gradient(145deg, #c8e6c9, #a5d6a7);
+  opacity: 0.55;
+  border-radius: 40% 60% 40% 60% / 50% 50% 50% 50%;
+}
+.blob-3 {
+  top: 200px; right: 60px;
+  width: 70px; height: 70px;
+  background: rgba(129,199,132,0.45);
+  border-radius: 50%;
+}
+/* Floating glass pills */
+.hero-pill {
+  position: absolute; z-index: 3;
+  background: rgba(255,255,255,0.52);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.82);
+  border-radius: 50px;
+  font-size: 10px; font-weight: 700; color: #1b5e20;
+  padding: 7px 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  display: flex; align-items: center; gap: 6px;
+}
+.hero-pill .dot {
+  width: 7px; height: 7px;
+  background: linear-gradient(135deg, #43a047, #66bb6a);
+  border-radius: 50%;
+}
+.pill-1 { top: 68px; right: 18px; }
+.pill-2 { top: 108px; right: 24px; }
+.pill-3 { top: 148px; right: 18px; }
+
+.hero-content { position: relative; z-index: 2; max-width: 62%; }
+.hero-eyebrow {
+  font-size: 8.5px; font-weight: 700; color: #43a047;
+  letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 16px;
+}
+h1.hero-title {
+  font-size: 27px; font-weight: 900; color: #1b5e20;
+  line-height: 1.45; margin-bottom: 16px;
+}
+.hero-line {
+  width: 36px; height: 3px;
+  background: linear-gradient(90deg, #43a047, #66bb6a);
+  border-radius: 2px; margin-bottom: 16px;
+}
+.hero-desc {
+  font-size: 11.5px; color: #444; line-height: 1.9; margin-bottom: 26px;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  color: #fff; font-size: 13px; font-weight: 900;
+  padding: 14px 26px; border-radius: 36px;
+  box-shadow: 0 8px 28px rgba(27,94,32,0.38);
+  text-decoration: none; border: none; cursor: pointer;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  margin-bottom: 12px; white-space: nowrap;
+}
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: #2e7d32; font-size: 12px; font-weight: 700;
+  padding: 10px 20px; border-radius: 28px;
+  border: 1.5px solid rgba(46,125,50,0.3);
+  text-decoration: none; cursor: pointer;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  white-space: nowrap;
+}
+.hero-ctas { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.hero-note { font-size: 10px; color: #888; margin-top: 10px; display: flex; align-items: center; gap: 4px; }
+.hero-note::before { content: "✓"; color: #43a047; font-weight: 700; }
+
+/* ── SECTION BASE ── */
+.glass-section {
+  background: linear-gradient(160deg, #e8f5e9 0%, #dcedc8 60%, #c8e6c9 100%);
+  padding: 56px 20px;
+  position: relative; overflow: hidden;
+}
+.glass-section::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 240px; height: 240px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+}
+.glass-section::after {
+  content: '';
+  position: absolute; bottom: -60px; left: -60px;
+  width: 180px; height: 180px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+
+.white-section {
+  background: #fff;
+  padding: 56px 20px;
+}
+
+.sec-label {
+  font-size: 9px; font-weight: 700; color: #43a047;
+  letter-spacing: 3px; text-transform: uppercase; text-align: center;
+  margin-bottom: 8px; position: relative; z-index: 1;
+}
+.sec-title {
+  font-size: 22px; font-weight: 900; color: #1b5e20;
+  text-align: center; line-height: 1.4; margin-bottom: 6px;
+  position: relative; z-index: 1;
+}
+.sec-line {
+  width: 28px; height: 3px;
+  background: linear-gradient(90deg, #43a047, #66bb6a);
+  border-radius: 2px; margin: 0 auto 24px;
+  position: relative; z-index: 1;
+}
+.sec-desc {
+  font-size: 13px; color: #555; line-height: 1.9;
+  text-align: center; margin-bottom: 28px;
+  position: relative; z-index: 1;
+}
+
+/* ── ABOUT ── */
+.about-glass {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 22px; padding: 28px 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+  position: relative; z-index: 1;
+}
+.about-glass p { font-size: 13px; color: #444; line-height: 1.95; }
+
+/* ── FEATURES ── */
+.features-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; position: relative; z-index: 1;
+}
+.feature-card {
+  background: rgba(255,255,255,0.52);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.82);
+  border-radius: 20px; padding: 22px 16px;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+}
+.feature-icon {
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 16px; font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.feature-title { font-size: 12px; font-weight: 900; color: #1b5e20; margin-bottom: 7px; line-height: 1.4; }
+.feature-desc  { font-size: 10.5px; color: #555; line-height: 1.8; }
+
+/* ── FLOW ── */
+.flow-steps { position: relative; z-index: 1; }
+.flow-track {
+  position: absolute; left: 23px; top: 32px; bottom: 32px;
+  width: 2px;
+  background: linear-gradient(180deg, #43a047 0%, #a5d6a7 100%);
+}
+.flow-step {
+  display: flex; align-items: flex-start; gap: 18px;
+  margin-bottom: 20px; position: relative; z-index: 1;
+}
+.flow-step:last-child { margin-bottom: 0; }
+.flow-num {
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 14px; font-weight: 900;
+  box-shadow: 0 6px 18px rgba(46,125,50,0.35);
+}
+.flow-body {
+  background: rgba(255,255,255,0.52);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 16px; padding: 14px 16px;
+  flex: 1;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  margin-top: 4px;
+}
+.flow-title { font-size: 13px; font-weight: 900; color: #1b5e20; margin-bottom: 5px; }
+.flow-desc  { font-size: 11px; color: #555; line-height: 1.8; }
+
+/* ── TESTIMONIALS ── */
+.testimonial-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.85);
+  border-radius: 20px; padding: 22px 20px; margin-bottom: 14px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+  position: relative; z-index: 1;
+}
+.testimonial-card:last-child { margin-bottom: 0; }
+.t-stars { color: #43a047; font-size: 14px; margin-bottom: 10px; letter-spacing: 1px; }
+.t-title { font-size: 14px; font-weight: 900; color: #1b5e20; margin-bottom: 9px; }
+.t-text  { font-size: 12px; color: #555; line-height: 1.9; margin-bottom: 12px; }
+.t-author {
+  font-size: 10px; font-weight: 700; color: #888;
+  display: flex; align-items: center; gap: 6px;
+}
+.t-author::before {
+  content: '';
+  display: block; width: 18px; height: 1px;
+  background: #c8e6c9;
+}
+
+/* ── KNOWLEDGE ── */
+.knowledge-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.82);
+  border-radius: 18px; overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+  display: flex; align-items: stretch;
+  position: relative; z-index: 1;
+}
+.knowledge-card:last-child { margin-bottom: 0; }
+.knowledge-img {
+  width: 88px; flex-shrink: 0;
+  background: linear-gradient(150deg, #c8e6c9, #81c784);
+  display: flex; align-items: center; justify-content: center; font-size: 28px;
+}
+.knowledge-body { padding: 14px 16px; }
+.k-tag {
+  display: inline-block; font-size: 9px; font-weight: 700;
+  color: #2e7d32; background: rgba(46,125,50,0.1);
+  border-radius: 6px; padding: 3px 9px; margin-bottom: 7px;
+}
+.k-title { font-size: 12px; font-weight: 700; color: #222; line-height: 1.5; margin-bottom: 6px; }
+.k-date  { font-size: 9.5px; color: #aaa; }
+
+/* ── CTA SECTION ── */
+.cta-section {
+  margin: 0 16px 0;
+  background: linear-gradient(150deg, #1a4d1f 0%, #2e7d32 45%, #388e3c 100%);
+  border-radius: 28px; padding: 44px 26px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 20px 56px rgba(27,94,32,0.35);
+}
+.cta-section::before {
+  content: ''; position: absolute;
+  top: -70px; right: -70px;
+  width: 220px; height: 220px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%; border: 1px solid rgba(255,255,255,0.12);
+}
+.cta-section::after {
+  content: ''; position: absolute;
+  bottom: -80px; left: -50px;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+.cta-glass-chip {
+  position: relative; z-index: 1;
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 24px; padding: 5px 14px;
+  font-size: 9.5px; font-weight: 700; color: rgba(255,255,255,0.9);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 18px;
+}
+.cta-title {
+  font-size: 21px; font-weight: 900; color: #fff;
+  line-height: 1.55; margin-bottom: 22px;
+  position: relative; z-index: 1;
+}
+.cta-checks {
+  list-style: none; margin-bottom: 30px;
+  position: relative; z-index: 1;
+}
+.cta-checks li {
+  font-size: 12.5px; color: rgba(255,255,255,0.88);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.cta-check-icon {
+  width: 22px; height: 22px; flex-shrink: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff;
+}
+.cta-btns { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+.cta-btn-primary {
+  display: block; background: #fff; color: #1b5e20;
+  font-size: 14px; font-weight: 900; text-align: center;
+  padding: 16px; border-radius: 36px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+  text-decoration: none; cursor: pointer;
+  font-family: 'Zen Kaku Gothic New', sans-serif; border: none;
+}
+.cta-btn-secondary {
+  display: block;
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff; font-size: 13px; font-weight: 700; text-align: center;
+  padding: 14px; border-radius: 32px;
+  text-decoration: none; cursor: pointer;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #0f2411;
+  padding: 40px 24px 28px;
+}
+.footer-logo { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.footer-logo span { color: #66bb6a; }
+.footer-tagline { font-size: 10.5px; color: #6a8f6d; margin-bottom: 28px; }
+.footer-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 22px; }
+.footer-links { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 11px; color: #6a8f6d; text-decoration: none; font-weight: 700; }
+.footer-tel { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 4px; letter-spacing: 1px; }
+.footer-tel-note { font-size: 10px; color: #6a8f6d; margin-bottom: 28px; }
+.footer-copy { font-size: 10px; color: #3a5a3d; }
+
+/* ── SPACER ── */
+.section-gap { height: 0; background: #f0f7f1; }
+
+/* ── APPROVAL BAR ── */
+.approval-bar {
+  position: sticky; bottom: 0; z-index: 200;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid #e8f5e9;
+  padding: 14px 20px; display: flex; gap: 10px;
+  box-shadow: 0 -6px 28px rgba(0,0,0,0.09);
+}
+.btn-approve {
+  flex: 1; background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: #fff; border: none; border-radius: 28px; padding: 13px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(46,125,50,0.3);
+}
+.btn-revise {
+  flex: 1; background: transparent; color: #2e7d32;
+  border: 1.5px solid #2e7d32; border-radius: 28px; padding: 13px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Life <span>Village</span></div>
+  <button class="nav-cta">無料で相談する →</button>
+</nav>
+
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- Glass pills floating on blob -->
+  <div class="hero-pill pill-1"><div class="dot"></div>相談料 完全無料</div>
+  <div class="hero-pill pill-2"><div class="dot"></div>オンライン対応OK</div>
+  <div class="hero-pill pill-3"><div class="dot"></div>何度でも相談可能</div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Life Insurance Consulting</div>
+    <h1 class="hero-title">あなたと、<br>あなたの<br>大切な人の<br>未来を支える<br>保障を。</h1>
+    <div class="hero-line"></div>
+    <p class="hero-desc">複数の保険会社の中から中立的な立場で<br>最適なプランを無料でご提案します。</p>
+    <div class="hero-ctas">
+      <button class="btn-primary">無料で相談する →</button>
+      <button class="btn-ghost">お問い合わせはこちら</button>
+    </div>
+    <div class="hero-note">ご相談・ご提案はすべて無料です</div>
+  </div>
+</section>
+
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="glass-section">
+  <div class="sec-label">About</div>
+  <h2 class="sec-title">Life Villageとは</h2>
+  <div class="sec-line"></div>
+  <div class="about-glass">
+    <p>Life Villageは、複数の保険会社の中から、お客様一人ひとりに最適な生命保険をご提案します。専門のコンサルタントがあなたのライフプランに寄り添い、将来の安心を一緒に設計します。</p>
+  </div>
+</section>
+
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section class="glass-section" style="background: linear-gradient(160deg,#dcedc8 0%,#c8e6c9 50%,#b2dfdb 100%);">
+  <div class="sec-label">Features</div>
+  <h2 class="sec-title">サービスの特徴</h2>
+  <div class="sec-line"></div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🤝</div>
+      <div class="feature-title">中立な立場でご提案</div>
+      <div class="feature-desc">特定の保険会社に依らず、複数の保険商品から最適なプランをご提案します。</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">無料で何度でも相談OK</div>
+      <div class="feature-desc">ご相談・ご提案はすべて無料。納得いくまで何度でもご相談いただけます。</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <div class="feature-title">わかりやすい説明</div>
+      <div class="feature-desc">難しい保険の内容を丁寧にわかりやすくご説明。初めての方も安心です。</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌿</div>
+      <div class="feature-title">ご契約後もサポート</div>
+      <div class="feature-desc">ご契約後の見直しや各種お手続きも長期にわたってサポートします。</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ FLOW ═══════════ -->
+<section class="glass-section" style="background: linear-gradient(160deg,#e8f5e9 0%,#f1f8e9 60%,#dcedc8 100%);">
+  <div class="sec-label">Flow</div>
+  <h2 class="sec-title">ご相談の流れ</h2>
+  <div class="sec-line"></div>
+  <div class="flow-steps">
+    <div class="flow-track"></div>
+    <div class="flow-step">
+      <div class="flow-num">01</div>
+      <div class="flow-body">
+        <div class="flow-title">ご予約</div>
+        <div class="flow-desc">Webフォームまたはお電話でご希望の日時をお申し付けください。</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">02</div>
+      <div class="flow-body">
+        <div class="flow-title">ヒアリング</div>
+        <div class="flow-desc">専門のコンサルタントが現在の状況やご希望を丁寧にお聞きします。</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">03</div>
+      <div class="flow-body">
+        <div class="flow-title">プランのご提案</div>
+        <div class="flow-desc">複数の保険商品の中から、最適なプランをご提案します。</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">04</div>
+      <div class="flow-body">
+        <div class="flow-title">ご検討</div>
+        <div class="flow-desc">ご提案内容をゆっくりご確認いただけます。ご不明点は何度でもご相談OKです。</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">05</div>
+      <div class="flow-body">
+        <div class="flow-title">ご契約・アフターサポート</div>
+        <div class="flow-desc">お手続きを丁寧にサポート。ご契約後も安心してお任せください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="glass-section" style="background: linear-gradient(160deg,#c8e6c9 0%,#dcedc8 50%,#e8f5e9 100%);">
+  <div class="sec-label">Voice</div>
+  <h2 class="sec-title">お客様の声</h2>
+  <div class="sec-line"></div>
+  <div class="testimonial-card">
+    <div class="t-stars">★★★★★</div>
+    <div class="t-title">自分に合った保険が見つかりました</div>
+    <div class="t-text">保険の知識が全くなく不安でしたが、丁寧に説明していただき、自分たちに本当に必要な保険を選ぶことができました。</div>
+    <div class="t-author">30代・ご夫婦</div>
+  </div>
+  <div class="testimonial-card">
+    <div class="t-stars">★★★★★</div>
+    <div class="t-title">相談してよかったです</div>
+    <div class="t-text">保険のことを深く考えていませんでしたが、具体的なアドバイスをもらえて安心しました。無料なのに親身になってもらえます。</div>
+    <div class="t-author">40代・女性</div>
+  </div>
+  <div class="testimonial-card">
+    <div class="t-stars">★★★★★</div>
+    <div class="t-title">親身にサポートしてくれました</div>
+    <div class="t-text">子どもの誕生をきっかけに相談しました。ライフプランに合わせて考えてくれて、安心して契約できました。</div>
+    <div class="t-author">30代・ご夫婦</div>
+  </div>
+</section>
+
+
+<!-- ═══════════ KNOWLEDGE ═══════════ -->
+<section class="glass-section" style="background: linear-gradient(160deg,#e8f5e9 0%,#dcedc8 100%);">
+  <div class="sec-label">Knowledge</div>
+  <h2 class="sec-title">生命保険の基礎知識</h2>
+  <div class="sec-line"></div>
+  <p class="sec-desc" style="margin-bottom:20px;">保険選びに役立つ、知っておきたい基礎知識を解説します。</p>
+  <div class="knowledge-card">
+    <div class="knowledge-img">📖</div>
+    <div class="knowledge-body">
+      <div class="k-tag">基礎知識</div>
+      <div class="k-title">生命保険の種類と特徴をわかりやすく解説</div>
+      <div class="k-date">2024.05.01</div>
+    </div>
+  </div>
+  <div class="knowledge-card">
+    <div class="knowledge-img">🌱</div>
+    <div class="knowledge-body">
+      <div class="k-tag">ライフプラン</div>
+      <div class="k-title">ライフステージ別に必要な保障とは？</div>
+      <div class="k-date">2024.04.15</div>
+    </div>
+  </div>
+  <div class="knowledge-card">
+    <div class="knowledge-img">🔍</div>
+    <div class="knowledge-body">
+      <div class="k-tag">見直し</div>
+      <div class="k-title">保険の見直し、いつするのがベスト？</div>
+      <div class="k-date">2024.04.01</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ CTA ═══════════ -->
+<section style="background:#f0f7f1; padding: 52px 0;">
+  <div class="cta-section">
+    <div class="cta-glass-chip">Free Consultation</div>
+    <h2 class="cta-title">未来の安心のために、<br>まずは無料相談から<br>始めてみませんか？</h2>
+    <ul class="cta-checks">
+      <li><div class="cta-check-icon">✓</div>ご相談は何度でも無料</li>
+      <li><div class="cta-check-icon">✓</div>オンライン相談も可能</li>
+      <li><div class="cta-check-icon">✓</div>無理な勧誘は一切ありません</li>
+    </ul>
+    <div class="cta-btns">
+      <button class="cta-btn-primary">無料で相談する →</button>
+      <button class="cta-btn-secondary">お問い合わせフォームはこちら</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-logo">Life <span>Village</span></div>
+  <div class="footer-tagline">あなたと、あなたの大切な人の未来を支える保障を。</div>
+  <div class="footer-divider"></div>
+  <div class="footer-links">
+    <a href="#">無料で相談する</a>
+    <a href="#">お問い合わせ</a>
+    <a href="#">プライバシーポリシー</a>
+  </div>
+  <div class="footer-tel">📞 0120-123-456</div>
+  <div class="footer-tel-note">受付時間 9:00〜18:00（土日祝も受付）</div>
+  <div class="footer-copy">© Life Village All Rights Reserved.</div>
+</footer>
+
+
+<!-- APPROVAL BAR -->
+<div class="approval-bar">
+  <button class="btn-approve" onclick="submitChoice('approved')">このデザインで進める ✓</button>
+  <button class="btn-revise" onclick="submitChoice('revise')">修正したい</button>
+</div>
+
+</body>
+</html>

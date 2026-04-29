@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Village 診断アプリ — UIモックアップ</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    background: #f0f7f1;
+    padding: 24px 16px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .screens {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .screen-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .screen-label {
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: 280px;
+    background: linear-gradient(160deg, #e8f5e9 0%, #c8e6c9 50%, #dcedc8 100%);
+    border-radius: 24px;
+    padding: 20px 16px;
+    box-shadow: 0 8px 32px rgba(27,94,32,0.12);
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---- TOP PAGE ---- */
+  .top-header {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .top-label {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: #43a047;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .top-title {
+    font-size: 17px;
+    font-weight: 900;
+    color: #1b5e20;
+    line-height: 1.5;
+  }
+
+  .glass-card {
+    background: rgba(255,255,255,0.52);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.82);
+    border-radius: 18px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+    padding: 16px;
+  }
+
+  .check-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .check-list li {
+    font-size: 11px;
+    color: #444;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .check-list li span.chk {
+    color: #2e7d32;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .btn-primary {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+    color: white;
+    font-weight: 900;
+    font-size: 13px;
+    border-radius: 36px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(27,94,32,0.38);
+    cursor: pointer;
+    border: none;
+  }
+  .btn-note {
+    text-align: center;
+    font-size: 10px;
+    color: #888;
+    margin-top: 8px;
+  }
+
+  /* ---- QUIZ PAGE ---- */
+  .progress-area {
+    margin-bottom: 14px;
+  }
+  .progress-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-bar-bg {
+    height: 5px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    width: 43%;
+  }
+  .quiz-header-bg {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+    border-radius: 14px 14px 0 0;
+    padding: 14px 16px;
+    margin: -16px -16px 0;
+  }
+  .quiz-card-body {
+    padding: 16px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 0 0 14px 14px;
+    border: 1px solid rgba(255,255,255,0.8);
+    border-top: none;
+  }
+  .quiz-q-num {
+    font-size: 10px;
+    color: #43a047;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+  .quiz-q-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1b5e20;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .answer-options {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .answer-opt {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(27,94,32,0.15);
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 11px;
+    color: #333;
+    cursor: pointer;
+  }
+  .answer-opt.selected {
+    background: linear-gradient(135deg, rgba(27,94,32,0.08), rgba(46,125,50,0.12));
+    border-color: #2e7d32;
+    color: #1b5e20;
+    font-weight: 700;
+  }
+
+  /* ---- RESULT PAGE ---- */
+  .result-tag {
+    display: inline-block;
+    background: #1b5e20;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .result-type-name {
+    font-size: 19px;
+    font-weight: 900;
+    color: #1b5e20;
+    margin-bottom: 8px;
+  }
+  .result-desc {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .risk-bar-section {
+    margin-bottom: 14px;
+  }
+  .risk-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  .risk-bar-bg {
+    height: 7px;
+    background: rgba(27,94,32,0.1);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  .risk-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #1b5e20, #43a047);
+  }
+  .cta-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .btn-ghost {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: #2e7d32;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 36px;
+    padding: 10px;
+    text-align: center;
+    border: 1.5px solid #2e7d32;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Life Village 診断アプリ — UIモックアップ（3画面）</h1>
+
+<div class="screens">
+
+  <!-- TOP PAGE -->
+  <div class="screen-wrap">
+    <span class="screen-label">① Top /diagnosis</span>
+    <div class="phone">
+      <div class="top-header">
+        <div class="top-label">Life Village</div>
+        <div class="top-title">あなたに合った<br>保険がわかる<br>無料診断</div>
+      </div>
+      <div class="glass-card">
+        <ul class="check-list">
+          <li><span class="chk">✓</span><span>7問・約1分で診断できます</span></li>
+          <li><span class="chk">✓</span><span>ライフステージ別に3タイプで診断</span></li>
+          <li><span class="chk">✓</span><span>結果に合わせた無料相談をご提案</span></li>
+        </ul>
+        <button class="btn-primary">診断スタート →</button>
+        <div class="btn-note">完全無料・登録不要</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ PAGE -->
+  <div class="screen-wrap">
+    <span class="screen-label">② Quiz /diagnosis/quiz</span>
+    <div class="phone">
+      <div class="quiz-header-bg">
+        <div class="progress-label">
+          <span>Q3 / 7</span>
+          <span>43%</span>
+        </div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
+      </div>
+      <div style="height:12px;"></div>
+      <div class="glass-card" style="padding:0;overflow:hidden;flex:1;">
+        <div class="quiz-card-body">
+          <div class="quiz-q-num">QUESTION 3 / 7</div>
+          <div class="quiz-q-text">老後の生活資金について、今から備えておきたいと感じますか？</div>
+          <div class="answer-options">
+            <div class="answer-opt selected">とても思う</div>
+            <div class="answer-opt">まあ思う</div>
+            <div class="answer-opt">あまり思わない</div>
+            <div class="answer-opt">全く思わない</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT PAGE -->
+  <div class="screen-wrap">
+    <span class="screen-label">③ Result /diagnosis/result?type=L</span>
+    <div class="phone">
+      <div class="top-header" style="margin-bottom:10px;">
+        <div class="top-label">診断結果</div>
+      </div>
+      <div class="glass-card" style="flex:1;display:flex;flex-direction:column;">
+        <div style="text-align:center;margin-bottom:12px;">
+          <span class="result-tag">L タイプ</span><br>
+          <div class="result-type-name">🏠 家族保障型</div>
+          <div class="result-desc">大切な家族の生活を守ることが最優先。万が一に備えた死亡保障を中心に、家族の将来を支える保険設計が向いています。</div>
+        </div>
+
+        <div class="risk-bar-section">
+          <div class="risk-bar-label"><span>家族への万が一リスク</span><span style="color:#1b5e20;font-weight:700;">高</span></div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width:88%;"></div></div>
+          <div class="risk-bar-label"><span>医療・入院リスク</span><span>中</span></div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width:55%;background:linear-gradient(90deg,#00838f,#26c6da);"></div></div>
+          <div class="risk-bar-label"><span>老後・資産形成リスク</span><span>低</span></div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width:32%;background:linear-gradient(90deg,#e65100,#ff9800);"></div></div>
+        </div>
+
+        <div class="cta-area" style="margin-top:auto;">
+          <button class="btn-primary" style="font-size:12px;padding:11px;">無料相談を申し込む →</button>
+          <button class="btn-ghost">LINEで結果を受け取る</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

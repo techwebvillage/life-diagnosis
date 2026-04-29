@@ -1,0 +1,92 @@
+<h2>診断結果 — 3タイプ設計</h2>
+<p class="subtitle">スコアの高い軸（L / M / F）によってタイプを判定。同点はL → M → Fの優先順位。</p>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:680px;margin:0 auto;">
+
+  <!-- Type L -->
+  <div style="background:linear-gradient(135deg,rgba(232,245,233,0.95),rgba(200,230,201,0.9));border:1.5px solid rgba(27,94,32,0.2);border-radius:16px;padding:20px;display:flex;gap:16px;align-items:flex-start;">
+    <div style="min-width:48px;height:48px;background:linear-gradient(135deg,#1b5e20,#2e7d32);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">🏠</div>
+    <div style="flex:1;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="background:#1b5e20;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:1px;">L タイプ</span>
+        <span style="font-size:16px;font-weight:900;color:#1b5e20;">家族保障型</span>
+      </div>
+      <p style="font-size:12px;color:#444;line-height:1.7;margin:0 0 8px;">大切な家族の生活を守ることが最優先。万が一に備えた死亡保障を中心に、家族の将来を支える保険設計が向いています。</p>
+      <div style="font-size:11px;color:#2e7d32;font-weight:600;">推奨：定期死亡保険・収入保障保険</div>
+    </div>
+  </div>
+
+  <!-- Type M -->
+  <div style="background:linear-gradient(135deg,rgba(224,247,250,0.95),rgba(178,235,242,0.7));border:1.5px solid rgba(0,131,143,0.2);border-radius:16px;padding:20px;display:flex;gap:16px;align-items:flex-start;">
+    <div style="min-width:48px;height:48px;background:linear-gradient(135deg,#006064,#00838f);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">🏥</div>
+    <div style="flex:1;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="background:#006064;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:1px;">M タイプ</span>
+        <span style="font-size:16px;font-weight:900;color:#006064;">医療・リスク備え型</span>
+      </div>
+      <p style="font-size:12px;color:#444;line-height:1.7;margin:0 0 8px;">病気やケガへの不安が大きい。医療費の自己負担に備えた医療保険や、働けなくなったときの収入を守る就業不能保険が向いています。</p>
+      <div style="font-size:11px;color:#00838f;font-weight:600;">推奨：医療保険・就業不能保険</div>
+    </div>
+  </div>
+
+  <!-- Type F -->
+  <div style="background:linear-gradient(135deg,rgba(255,248,225,0.95),rgba(255,236,179,0.7));border:1.5px solid rgba(245,127,23,0.2);border-radius:16px;padding:20px;display:flex;gap:16px;align-items:flex-start;">
+    <div style="min-width:48px;height:48px;background:linear-gradient(135deg,#e65100,#f57c00);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">🌱</div>
+    <div style="flex:1;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="background:#e65100;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:1px;">F タイプ</span>
+        <span style="font-size:16px;font-weight:900;color:#e65100;">資産形成型</span>
+      </div>
+      <p style="font-size:12px;color:#444;line-height:1.7;margin:0 0 8px;">老後への備えや資産形成を意識している。積立型保険や個人年金保険など、「貯蓄＋保障」を両立できる商品が向いています。</p>
+      <div style="font-size:11px;color:#f57c00;font-weight:600;">推奨：終身保険（積立型）・個人年金保険</div>
+    </div>
+  </div>
+
+</div>
+
+<div style="max-width:680px;margin:24px auto 0;">
+  <h3 style="color:#1b5e20;margin-bottom:12px;">質問設計（7問）</h3>
+  <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(27,94,32,0.12);border-radius:12px;overflow:hidden;">
+    <div style="display:grid;grid-template-columns:32px 1fr 40px;gap:0;">
+      <div style="background:#1b5e20;color:white;font-size:10px;font-weight:700;padding:8px;text-align:center;">#</div>
+      <div style="background:#1b5e20;color:white;font-size:10px;font-weight:700;padding:8px;">質問</div>
+      <div style="background:#1b5e20;color:white;font-size:10px;font-weight:700;padding:8px;text-align:center;">軸</div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px 1fr 40px;border-top:1px solid rgba(27,94,32,0.1);">
+      <div style="padding:10px 8px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;border-right:1px solid rgba(27,94,32,0.08);">1</div>
+      <div style="padding:10px;font-size:11px;color:#333;border-right:1px solid rgba(27,94,32,0.08);">配偶者やお子様など、あなたの収入に頼っている家族がいますか？</div>
+      <div style="padding:10px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;">L</div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px 1fr 40px;border-top:1px solid rgba(27,94,32,0.08);background:rgba(232,245,233,0.3);">
+      <div style="padding:10px 8px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;border-right:1px solid rgba(27,94,32,0.08);">2</div>
+      <div style="padding:10px;font-size:11px;color:#333;border-right:1px solid rgba(27,94,32,0.08);">病気やケガで長期入院になった場合の医療費が心配ですか？</div>
+      <div style="padding:10px;text-align:center;font-size:11px;font-weight:700;color:#006064;">M</div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px 1fr 40px;border-top:1px solid rgba(27,94,32,0.08);">
+      <div style="padding:10px 8px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;border-right:1px solid rgba(27,94,32,0.08);">3</div>
+      <div style="padding:10px;font-size:11px;color:#333;border-right:1px solid rgba(27,94,32,0.08);">老後の生活資金について、今から備えておきたいと感じますか？</div>
+      <div style="padding:10px;text-align:center;font-size:11px;font-weight:700;color:#e65100;">F</div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px 1fr 40px;border-top:1px solid rgba(27,94,32,0.08);background:rgba(232,245,233,0.3);">
+      <div style="padding:10px 8px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;border-right:1px solid rgba(27,94,32,0.08);">4</div>
+      <div style="padding:10px;font-size:11px;color:#333;border-right:1px solid rgba(27,94,32,0.08);">万が一のとき、家族の生活を守れるか不安がありますか？</div>
+      <div style="padding:10px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;">L</div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px 1fr 40px;border-top:1px solid rgba(27,94,32,0.08);">
+      <div style="padding:10px 8px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;border-right:1px solid rgba(27,94,32,0.08);">5</div>
+      <div style="padding:10px;font-size:11px;color:#333;border-right:1px solid rgba(27,94,32,0.08);">現在の医療・入院への備えが不十分だと感じることがありますか？</div>
+      <div style="padding:10px;text-align:center;font-size:11px;font-weight:700;color:#006064;">M</div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px 1fr 40px;border-top:1px solid rgba(27,94,32,0.08);background:rgba(232,245,233,0.3);">
+      <div style="padding:10px 8px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;border-right:1px solid rgba(27,94,32,0.08);">6</div>
+      <div style="padding:10px;font-size:11px;color:#333;border-right:1px solid rgba(27,94,32,0.08);">将来受け取れる公的年金だけでは生活が不安だと思いますか？</div>
+      <div style="padding:10px;text-align:center;font-size:11px;font-weight:700;color:#e65100;">F</div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px 1fr 40px;border-top:1px solid rgba(27,94,32,0.08);">
+      <div style="padding:10px 8px;text-align:center;font-size:11px;font-weight:700;color:#1b5e20;border-right:1px solid rgba(27,94,32,0.08);">7</div>
+      <div style="padding:10px;font-size:11px;color:#333;border-right:1px solid rgba(27,94,32,0.08);">今の保険をプロに相談・見直ししてみたいと思いますか？</div>
+      <div style="padding:10px;text-align:center;font-size:11px;font-weight:700;color:#888;">L+M+F</div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#888;margin-top:8px;padding:0 4px;">回答選択肢（4択）: とても思う(3) / まあ思う(2) / あまり思わない(1) / 全く思わない(0)</div>
+</div>
