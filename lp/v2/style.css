@@ -123,3 +123,266 @@ button { cursor: pointer; font-family: inherit; border: none; }
   border-radius: 50%;
   pointer-events: none;
 }
+
+/* ── レイアウト共通 ── */
+.inner {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+.text-center { text-align: center; }
+
+/* ── ヒーロー ── */
+.hero {
+  background: linear-gradient(160deg, var(--green-softest) 0%, #dcedc8 60%, var(--green-pale) 100%);
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.hero-title {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--green-deep);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.hero-sub {
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.9;
+  margin-bottom: 36px;
+}
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.cta-note {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── 課題提起 ── */
+.worries-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.worry-card {
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-sub);
+}
+.worry-icon {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.worries-lead {
+  font-size: 15px;
+  color: var(--text-sub);
+  text-align: center;
+  line-height: 1.8;
+}
+.worries-lead strong {
+  color: var(--green-deep);
+  font-weight: 900;
+}
+
+/* ── サービス概要 ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.service-card {
+  padding: 20px 16px;
+}
+.service-icon {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+.service-card h3 {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--green-deep);
+  margin-bottom: 8px;
+}
+.service-card p {
+  font-size: 12px;
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+/* ── 公務員特化の理由 ── */
+.reasons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.reason-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.reason-num {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--green-pale);
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 48px;
+}
+.reason-item h3 {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--green-deep);
+  margin-bottom: 6px;
+}
+.reason-item p {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.8;
+}
+
+/* ── 診断CTA（中間） ── */
+.diagnosis-cta-section {
+  background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-forest) 100%);
+}
+.diagnosis-cta-section .sec-label,
+.diagnosis-cta-section .sec-title,
+.diagnosis-cta-section .sec-desc {
+  color: rgba(255,255,255,0.9);
+}
+.diagnosis-cta-section .sec-line {
+  background: linear-gradient(90deg, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
+}
+.diagnosis-cta-section .btn-primary {
+  background: #fff;
+  color: var(--green-deep);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+}
+
+/* ── 相談の流れ ── */
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.flow-step {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 480px;
+}
+.flow-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-deep), var(--green-forest));
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.flow-step h3 {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--green-deep);
+  margin-bottom: 6px;
+}
+.flow-step p {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.8;
+}
+.flow-arrow {
+  font-size: 24px;
+  color: var(--green-vivid);
+  padding: 8px 0;
+}
+
+/* ── FAQ ── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.faq-item {
+  padding: 16px 20px;
+}
+.faq-item summary {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green-deep);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-item summary::after {
+  content: '+';
+  font-size: 20px;
+  color: var(--green-vivid);
+  flex-shrink: 0;
+}
+.faq-item[open] summary::after {
+  content: '−';
+}
+.faq-item p {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.9;
+  margin-top: 12px;
+  border-top: 1px solid rgba(27,94,32,0.1);
+  padding-top: 12px;
+}
+
+/* ── 最終CTA ── */
+.final-cta-section {
+  background: linear-gradient(135deg, var(--green-deep) 0%, #1a4a1e 100%);
+  padding: 80px 24px;
+}
+.final-cta-title {
+  font-size: 30px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.final-cta-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 32px;
+  text-align: center;
+}
+.btn-large {
+  padding: 18px 40px;
+  font-size: 16px;
+}
+.final-cta-section .btn-primary {
+  background: #fff;
+  color: var(--green-deep);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+}
+
+/* ── レスポンシブ ── */
+@media (max-width: 480px) {
+  .hero-title { font-size: 28px; }
+  .worries-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .final-cta-title { font-size: 24px; }
+}
