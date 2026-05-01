@@ -5,7 +5,7 @@ import { VALID_TYPES, DEFAULT_TYPE } from '@/lib/diagnosis/types'
 import ResultCard from '@/components/diagnosis/ResultCard'
 
 const CONSULTATION_URL =
-  process.env.NEXT_PUBLIC_CONSULTATION_URL ?? 'https://life.tech-village.co.jp/contact/'
+  process.env.NEXT_PUBLIC_CONSULTATION_URL ?? 'https://life.tech-village.co.jp/consultation/'
 const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL ?? 'https://lin.ee/XXXXXXX'
 
 type Props = {

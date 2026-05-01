@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { DiagnosisType } from '@/lib/diagnosis/types'
-import { DEFAULT_TYPE } from '@/lib/diagnosis/types'
+import { DEFAULT_TYPE, VALID_TYPES } from '@/lib/diagnosis/types'
 
 const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL ?? 'https://lin.ee/XXXXXXX'
 const STORAGE_KEY = 'lv_quiz_result'
@@ -25,7 +25,8 @@ export default function PreviewPage() {
       if (
         typeof parsed === 'object' &&
         parsed !== null &&
-        typeof (parsed as QuizResult).type === 'string'
+        typeof (parsed as QuizResult).type === 'string' &&
+        (VALID_TYPES as string[]).includes((parsed as QuizResult).type)
       ) {
         setResult({ type: (parsed as QuizResult).type })
       }
