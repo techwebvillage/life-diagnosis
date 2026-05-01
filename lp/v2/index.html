@@ -16,6 +16,7 @@
   --green-vivid:   #43a047;
   --green-light:   #66bb6a;
   --green-pale:    #c8e6c9;
+  --green-mint:    #dcedc8;
   --green-softest: #e8f5e9;
   --bg-page:       #f0f7f1;
   --text-main:     #222222;
@@ -24,6 +25,7 @@
   --glass-bg:      rgba(255,255,255,0.52);
   --glass-border:  rgba(255,255,255,0.82);
   --glass-blur:    blur(14px);
+  --glass-blur-light: blur(8px);
   --radius-card:   20px;
   --radius-btn:    36px;
   --shadow-card:   0 6px 28px rgba(0,0,0,0.07);
@@ -32,6 +34,7 @@
 
 /* ── リセット ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Zen Kaku Gothic New', sans-serif;
@@ -56,11 +59,12 @@ button { cursor: pointer; font-family: inherit; border: none; }
 /* ── セクション共通ラッパー ── */
 .section {
   padding: 64px 24px;
+  margin: 0;
   position: relative;
   overflow: hidden;
 }
 .section--green {
-  background: linear-gradient(160deg, var(--green-softest) 0%, #dcedc8 60%, var(--green-pale) 100%);
+  background: linear-gradient(160deg, var(--green-softest) 0%, var(--green-mint) 60%, var(--green-pale) 100%);
 }
 
 /* ── セクションラベル / タイトル ── */
@@ -117,218 +121,381 @@ button { cursor: pointer; font-family: inherit; border: none; }
   align-items: center;
   gap: 6px;
   background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: var(--glass-blur-light);
+  -webkit-backdrop-filter: var(--glass-blur-light);
   color: var(--green-forest);
   font-size: 13px;
   font-weight: 700;
   padding: 11px 22px;
-  border-radius: 32px;
+  border-radius: var(--radius-btn);
   border: 1.5px solid rgba(46,125,50,0.3);
   white-space: nowrap;
 }
 
-/* ── 装飾円（セクション背景） ── */
+/* ── フォーカス（アクセシビリティ） ── */
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible,
+.cta__btn-primary:focus-visible,
+.cta__btn-ghost:focus-visible,
+.footer__links a:focus-visible {
+  outline: 3px solid var(--green-vivid);
+  outline-offset: 3px;
+}
+
+/* ── 装飾円 ── */
 .deco-circle {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
 }
 
-/* ── レイアウト共通 ── */
-.inner {
-  max-width: 680px;
-  margin: 0 auto;
-  position: relative;
+/* ── ナビゲーション ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(165,214,167,0.35);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.text-center { text-align: center; }
-
-/* ── ヒーロー ── */
-.hero {
-  background: linear-gradient(160deg, var(--green-softest) 0%, #dcedc8 60%, var(--green-pale) 100%);
-  padding-top: 80px;
-  padding-bottom: 80px;
-}
-.hero-title {
-  font-size: 36px;
+.nav__logo {
+  font-size: 18px;
   font-weight: 900;
   color: var(--green-deep);
-  line-height: 1.3;
-  margin-bottom: 16px;
+  letter-spacing: 0.5px;
 }
-.hero-sub {
-  font-size: 14px;
+.nav__logo span { color: var(--green-vivid); }
+.nav__cta { font-size: 12px; padding: 10px 20px; }
+
+/* ── ヒーローセクション ── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  min-height: 520px;
+  padding: 56px 24px 64px;
+}
+.hero__blob {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero__blob--1 {
+  top: -80px; right: -60px;
+  width: 340px; height: 360px;
+  background: linear-gradient(145deg, #b2dfdb 0%, #a5d6a7 50%, #81c784 100%);
+  border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
+  opacity: 0.9;
+}
+.hero__blob--2 {
+  bottom: -70px; right: -10px;
+  width: 200px; height: 220px;
+  background: linear-gradient(145deg, var(--green-pale), #a5d6a7);
+  border-radius: 40% 60% 40% 60% / 50% 50% 50% 50%;
+  opacity: 0.55;
+}
+.hero__blob--3 {
+  top: 220px; right: 70px;
+  width: 72px; height: 72px;
+  background: rgba(129,199,132,0.45);
+  border-radius: 50%;
+}
+.hero__pill {
+  position: absolute;
+  z-index: 3;
+  background: rgba(255,255,255,0.52);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green-deep);
+  padding: 8px 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  pointer-events: none;
+}
+.hero__pill-dot {
+  width: 8px; height: 8px;
+  background: linear-gradient(135deg, var(--green-vivid), var(--green-light));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.hero__pill--1 { top: 72px;  right: 20px; }
+.hero__pill--2 { top: 116px; right: 28px; }
+.hero__pill--3 { top: 160px; right: 20px; }
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 62%;
+}
+.hero__eyebrow {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--green-vivid);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.hero__title {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--green-deep);
+  line-height: 1.45;
+  margin-bottom: 18px;
+}
+.hero__line {
+  width: 36px; height: 3px;
+  background: linear-gradient(90deg, var(--green-vivid), var(--green-light));
+  border-radius: 2px;
+  margin-bottom: 18px;
+}
+.hero__desc {
+  font-size: 12px;
   color: var(--text-sub);
   line-height: 1.9;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
 }
-.hero-cta {
+.hero__ctas {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
 }
-.cta-note {
+.hero__note {
   font-size: 11px;
   color: var(--text-muted);
 }
 
-/* ── 課題提起 ── */
+/* ── 課題提起セクション ── */
+.worries__deco-1 {
+  top: -80px; right: -80px;
+  width: 240px; height: 240px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.worries__deco-2 {
+  bottom: -60px; left: -60px;
+  width: 180px; height: 180px;
+  background: rgba(255,255,255,0.08);
+}
 .worries-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
   margin-bottom: 24px;
 }
 .worry-card {
-  padding: 16px;
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--text-sub);
+  padding: 22px 18px;
 }
 .worry-icon {
   display: block;
   font-size: 24px;
   margin-bottom: 8px;
 }
+.worry-card p {
+  font-size: 12px;
+  color: var(--text-sub);
+  line-height: 1.8;
+}
 .worries-lead {
   font-size: 15px;
   color: var(--text-sub);
   text-align: center;
   line-height: 1.8;
+  position: relative;
+  z-index: 1;
 }
 .worries-lead strong {
   color: var(--green-deep);
   font-weight: 900;
 }
 
-/* ── サービス概要 ── */
-.services-grid {
+/* ── サービス概要（Features）── */
+.section--features {
+  background: linear-gradient(160deg, var(--green-mint) 0%, var(--green-pale) 50%, #b2dfdb 100%);
+}
+.features__deco-1 {
+  top: -80px; right: -80px;
+  width: 240px; height: 240px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.features__deco-2 {
+  bottom: -60px; left: -60px;
+  width: 180px; height: 180px;
+  background: rgba(255,255,255,0.08);
+}
+.features__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
 }
-.service-card {
-  padding: 20px 16px;
+.features__card {
+  padding: 22px 18px;
 }
-.service-icon {
-  display: block;
-  font-size: 28px;
-  margin-bottom: 10px;
+.features__icon {
+  font-size: 32px;
+  margin-bottom: 12px;
 }
-.service-card h3 {
-  font-size: 14px;
+.features__title {
+  font-size: 13px;
   font-weight: 900;
   color: var(--green-deep);
   margin-bottom: 8px;
+  line-height: 1.4;
 }
-.service-card p {
-  font-size: 12px;
+.features__desc {
+  font-size: 11px;
   color: var(--text-sub);
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-/* ── 公務員特化の理由 ── */
+/* ── 公務員特化の理由（Voice流用）── */
+.section--reasons {
+  background: linear-gradient(160deg, var(--green-pale) 0%, var(--green-mint) 50%, var(--green-softest) 100%);
+}
+.reasons__deco-1 {
+  top: -80px; right: -80px;
+  width: 220px; height: 220px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.reasons__deco-2 {
+  bottom: -60px; left: -60px;
+  width: 160px; height: 160px;
+  background: rgba(255,255,255,0.08);
+}
 .reasons-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-.reason-item {
-  display: flex;
-  align-items: flex-start;
   gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+.reason-card {
+  padding: 24px 22px;
+}
+.reason-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
 }
 .reason-num {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--green-pale);
-  line-height: 1;
+  width: 36px; height: 36px;
   flex-shrink: 0;
-  min-width: 48px;
-}
-.reason-item h3 {
-  font-size: 15px;
-  font-weight: 900;
-  color: var(--green-deep);
-  margin-bottom: 6px;
-}
-.reason-item p {
-  font-size: 13px;
-  color: var(--text-sub);
-  line-height: 1.8;
-}
-
-/* ── 診断CTA（中間） ── */
-.diagnosis-cta-section {
-  background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-forest) 100%);
-}
-.diagnosis-cta-section .sec-label,
-.diagnosis-cta-section .sec-title,
-.diagnosis-cta-section .sec-desc {
-  color: rgba(255,255,255,0.9);
-}
-.diagnosis-cta-section .sec-line {
-  background: linear-gradient(90deg, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
-}
-.diagnosis-cta-section .btn-primary {
-  background: #fff;
-  color: var(--green-deep);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.15);
-}
-
-/* ── 相談の流れ ── */
-.flow-steps {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-.flow-step {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  padding: 24px 20px;
-  width: 100%;
-  max-width: 480px;
-}
-.flow-num {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
   background: linear-gradient(135deg, var(--green-deep), var(--green-forest));
-  color: #fff;
-  font-size: 18px;
-  font-weight: 900;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
 }
-.flow-step h3 {
+.reason-title {
   font-size: 15px;
+  font-weight: 900;
+  color: var(--green-deep);
+  line-height: 1.4;
+}
+.reason-desc {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.9;
+}
+
+/* ── Flowセクション ── */
+.section--flow {
+  background: linear-gradient(160deg, var(--green-softest) 0%, #f1f8e9 60%, var(--green-mint) 100%);
+}
+.flow__deco-1 {
+  top: -80px; right: -80px;
+  width: 220px; height: 220px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.flow__deco-2 {
+  bottom: -60px; left: -60px;
+  width: 160px; height: 160px;
+  background: rgba(255,255,255,0.08);
+}
+.flow__steps {
+  list-style: none;
+  position: relative;
+  z-index: 1;
+}
+.flow__steps::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 28px;
+  bottom: 28px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--green-vivid) 0%, #a5d6a7 100%);
+  z-index: 0;
+}
+.flow__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+.flow__step:last-child { margin-bottom: 0; }
+.flow__num {
+  width: 48px; height: 48px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--green-forest), var(--green-vivid));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 6px 18px rgba(46,125,50,0.35);
+}
+.flow__body {
+  flex: 1;
+  padding: 16px 18px;
+  margin-top: 4px;
+}
+.flow__title {
+  font-size: 14px;
   font-weight: 900;
   color: var(--green-deep);
   margin-bottom: 6px;
 }
-.flow-step p {
-  font-size: 13px;
+.flow__desc {
+  font-size: 12px;
   color: var(--text-sub);
   line-height: 1.8;
 }
-.flow-arrow {
-  font-size: 24px;
-  color: var(--green-vivid);
-  padding: 8px 0;
-}
 
-/* ── FAQ ── */
+/* ── FAQセクション ── */
 .faq-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
+  z-index: 1;
 }
 .faq-item {
   padding: 16px 20px;
@@ -342,6 +509,7 @@ button { cursor: pointer; font-family: inherit; border: none; }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
 .faq-item summary::after {
   content: '+';
@@ -349,9 +517,7 @@ button { cursor: pointer; font-family: inherit; border: none; }
   color: var(--green-vivid);
   flex-shrink: 0;
 }
-.faq-item[open] summary::after {
-  content: '−';
-}
+.faq-item[open] summary::after { content: '−'; }
 .faq-item p {
   font-size: 13px;
   color: var(--text-sub);
@@ -361,239 +527,543 @@ button { cursor: pointer; font-family: inherit; border: none; }
   padding-top: 12px;
 }
 
-/* ── 最終CTA ── */
-.final-cta-section {
-  background: linear-gradient(135deg, var(--green-deep) 0%, #1a4a1e 100%);
-  padding: 80px 24px;
+/* ── CTAセクション ── */
+.cta-wrap {
+  background: var(--bg-page);
+  padding: 56px 20px;
+  position: relative;
+  overflow: hidden;
 }
-.final-cta-title {
-  font-size: 30px;
+.cta {
+  background: linear-gradient(150deg, #1a4d1f 0%, var(--green-forest) 45%, #388e3c 100%);
+  border-radius: 28px;
+  padding: 48px 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 56px rgba(27,94,32,0.35);
+}
+.cta__deco {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cta__deco--1 {
+  top: -70px; right: -70px;
+  width: 220px; height: 220px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.cta__deco--2 {
+  bottom: -80px; left: -50px;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.04);
+}
+.cta__chip {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: var(--glass-blur-light);
+  -webkit-backdrop-filter: var(--glass-blur-light);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 24px;
+  padding: 6px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.cta__title {
+  font-size: 22px;
   font-weight: 900;
   color: #fff;
-  line-height: 1.4;
-  margin-bottom: 12px;
-  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
 }
-.final-cta-sub {
-  font-size: 13px;
-  color: rgba(255,255,255,0.7);
+.cta__checks {
+  list-style: none;
   margin-bottom: 32px;
-  text-align: center;
+  position: relative;
+  z-index: 1;
 }
-.btn-large {
-  padding: 18px 40px;
-  font-size: 16px;
+.cta__checks li {
+  font-size: 13px;
+  color: rgba(255,255,255,0.88);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
 }
-.final-cta-section .btn-primary {
+.cta__check-icon {
+  width: 24px; height: 24px;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.cta__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+.cta__btn-primary {
+  display: block;
   background: #fff;
   color: var(--green-deep);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+  font-size: 15px;
+  font-weight: 900;
+  text-align: center;
+  padding: 17px;
+  border-radius: 36px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+}
+.cta__btn-ghost {
+  display: block;
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: var(--glass-blur-light);
+  -webkit-backdrop-filter: var(--glass-blur-light);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  padding: 14px;
+  border-radius: 32px;
 }
 
-/* ── レスポンシブ ── */
-@media (max-width: 480px) {
-  .hero-title { font-size: 28px; }
-  .worries-grid { grid-template-columns: 1fr; }
-  .services-grid { grid-template-columns: 1fr; }
-  .final-cta-title { font-size: 24px; }
+/* ── フッター ── */
+.footer {
+  background: #0f2411;
+  padding: 44px 24px 32px;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+.footer__logo {
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.footer__logo span { color: var(--green-light); }
+.footer__tagline {
+  font-size: 11px;
+  color: #6a8f6d;
+  margin-bottom: 28px;
+}
+.footer__divider {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin-bottom: 24px;
+}
+.footer__links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.footer__links a {
+  font-size: 12px;
+  color: #6a8f6d;
+  font-weight: 700;
+}
+.footer__links a:hover { color: var(--green-light); }
+.footer__copy {
+  font-size: 11px;
+  color: #3a5a3d;
+}
+
+/* ═══════════════════════════════
+   アニメーション
+   ═══════════════════════════════ */
+@keyframes blob-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-18px) scale(1.03); }
+}
+@keyframes blob-morph {
+  0%, 100% { border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%; }
+  33%      { border-radius: 48% 52% 42% 58% / 48% 58% 42% 52%; }
+  66%      { border-radius: 55% 45% 62% 38% / 62% 44% 56% 44%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes deco-pulse {
+  0%, 100% { transform: scale(1);    opacity: 0.12; }
+  50%       { transform: scale(1.1); opacity: 0.2; }
+}
+
+.hero__blob--1 {
+  animation: blob-morph 9s ease-in-out infinite,
+             blob-float 7s ease-in-out infinite;
+}
+.hero__blob--2 { animation: float 8s ease-in-out 1s infinite; }
+.hero__pill--1 { animation: float 4.5s ease-in-out infinite; }
+.hero__pill--2 { animation: float 4.5s ease-in-out 0.9s infinite; }
+.hero__pill--3 { animation: float 4.5s ease-in-out 1.8s infinite; }
+.deco-circle   { animation: deco-pulse 6s ease-in-out infinite; }
+
+/* ガラスカード ホバーリフト */
+.glass-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.11);
+}
+
+/* スクロールフェードイン */
+.anim-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.anim-fade.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* reduced-motion 対応 */
+.sp-only { display: inline; }
+@media (min-width: 768px) { .sp-only { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__blob--1, .hero__blob--2,
+  .hero__pill--1, .hero__pill--2, .hero__pill--3,
+  .deco-circle { animation: none; }
+  .anim-fade { opacity: 1; transform: none; transition: none; }
+}
+
+/* ═══════════════════════════════
+   レスポンシブ（タブレット: 768px〜）
+   ═══════════════════════════════ */
+@media (min-width: 768px) {
+  .hero {
+    min-height: 600px;
+    padding: 72px 48px 80px;
+  }
+  .hero__title  { font-size: 38px; }
+  .hero__desc   { font-size: 14px; }
+  .hero__content { max-width: 55%; }
+  .hero__blob--1 { width: 460px; height: 480px; top: -100px; right: -80px; }
+  .hero__blob--2 { width: 280px; height: 300px; }
+  .hero__pill    { font-size: 13px; padding: 10px 20px; }
+  .hero__pill--1 { top: 90px;  right: 40px; }
+  .hero__pill--2 { top: 140px; right: 50px; }
+  .hero__pill--3 { top: 190px; right: 40px; }
+
+  .section { padding: 80px 48px; }
+  .sec-title { font-size: 28px; }
+  .features__grid { gap: 18px; }
+  .features__card { padding: 28px 22px; }
+  .reasons-list { gap: 20px; }
+}
+
+/* ═══════════════════════════════
+   レスポンシブ（PC: 1200px〜）
+   ═══════════════════════════════ */
+@media (min-width: 1200px) {
+  body { font-size: 16px; }
+
+  .hero {
+    min-height: 700px;
+    padding: 96px 80px 96px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .hero__title   { font-size: 48px; }
+  .hero__content { max-width: 50%; }
+  .hero__blob--1 { width: 620px; height: 640px; right: -100px; }
+  .hero__pill    { font-size: 14px; }
+  .hero__pill--1 { top: 110px; right: 80px; }
+  .hero__pill--2 { top: 168px; right: 96px; }
+  .hero__pill--3 { top: 226px; right: 80px; }
+
+  .section { padding: 96px 80px; max-width: 1200px; margin: 0 auto; }
+
+  .features__grid { grid-template-columns: repeat(4, 1fr); }
+  .flow__steps    { max-width: 700px; margin: 0 auto; }
+
+  .reasons-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .cta      { max-width: 800px; margin: 0 auto; padding: 56px 48px; }
+  .cta-wrap { padding: 80px 80px; }
+  .cta__btns { flex-direction: row; }
+  .cta__btn-primary { flex: 1; }
+  .cta__btn-ghost   { flex: 1; }
+
+  .footer { max-width: 100%; }
 }
   </style>
 </head>
 <body>
+  <header class="nav">
+    <div class="nav__logo">Life <span>Village</span></div>
+    <a href="https://life.tech-village.co.jp/diagnosis" class="btn-primary nav__cta">無料診断を始める →</a>
+  </header>
 
   <!-- ① ヒーロー -->
-  <section class="hero section">
-    <div class="deco-circle" style="width:320px;height:320px;top:-80px;right:-100px;background:rgba(67,160,71,0.1)"></div>
-    <div class="deco-circle" style="width:200px;height:200px;bottom:-60px;left:-60px;background:rgba(27,94,32,0.08)"></div>
-    <div class="inner text-center">
-      <span class="sec-label">Life Village</span>
-      <h1 class="hero-title">公務員のお金、<br>まるごと相談。</h1>
-      <p class="hero-sub">保険・NISA・退職金・ライフプランを<br>公務員専門の相談窓口がトータルサポート</p>
-      <div class="hero-cta">
-        <a href="https://life.tech-village.co.jp/diagnosis" class="btn-primary">
-          今すぐ無料診断する →
-        </a>
-        <p class="cta-note">完全無料・登録不要・約1分</p>
+  <section class="hero">
+    <div class="hero__blob hero__blob--1" aria-hidden="true"></div>
+    <div class="hero__blob hero__blob--2" aria-hidden="true"></div>
+    <div class="hero__blob hero__blob--3" aria-hidden="true"></div>
+
+    <div class="hero__pill hero__pill--1" aria-hidden="true">
+      <span class="hero__pill-dot"></span>相談料 完全無料
+    </div>
+    <div class="hero__pill hero__pill--2" aria-hidden="true">
+      <span class="hero__pill-dot"></span>公務員専門の相談窓口
+    </div>
+    <div class="hero__pill hero__pill--3" aria-hidden="true">
+      <span class="hero__pill-dot"></span>オンライン対応OK
+    </div>
+
+    <div class="hero__content">
+      <span class="hero__eyebrow">Money Consultation for Civil Servants</span>
+      <h1 class="hero__title">公務員のお金、<br class="sp-only">まるごと<br>相談できます。</h1>
+      <div class="hero__line"></div>
+      <p class="hero__desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
+      <div class="hero__ctas">
+        <a href="https://life.tech-village.co.jp/diagnosis" class="btn-primary">今すぐ無料診断する →</a>
+        <a href="https://life.tech-village.co.jp/consultation/" class="btn-ghost">まず相談してみる</a>
       </div>
+      <p class="hero__note">✓ ご相談・ご診断はすべて無料です</p>
     </div>
   </section>
 
   <!-- ② 課題提起 -->
   <section class="section section--green">
-    <div class="inner">
-      <span class="sec-label">こんな悩みはありませんか？</span>
-      <h2 class="sec-title">公務員ならではの<br>お金の悩み</h2>
-      <div class="sec-line"></div>
-      <div class="worries-grid">
-        <div class="worry-card glass-card">
-          <span class="worry-icon">😟</span>
-          <p>「共済があるから大丈夫」と思っていたけど、保障が手薄だった</p>
-        </div>
-        <div class="worry-card glass-card">
-          <span class="worry-icon">🤔</span>
-          <p>NISAやiDeCoを始めたいけど、何から手をつければいいかわからない</p>
-        </div>
-        <div class="worry-card glass-card">
-          <span class="worry-icon">😰</span>
-          <p>退職金の受け取り方で税金が変わると聞いたけど、詳しくない</p>
-        </div>
-        <div class="worry-card glass-card">
-          <span class="worry-icon">😣</span>
-          <p>マイホームを買いたいが、教育費や老後資金との両立が不安</p>
-        </div>
-      </div>
-      <p class="worries-lead">そのお悩み、<strong>Life Villageにまとめてご相談ください。</strong></p>
+    <div class="deco-circle worries__deco-1" aria-hidden="true"></div>
+    <div class="deco-circle worries__deco-2" aria-hidden="true"></div>
+    <span class="sec-label">こんな悩みはありませんか？</span>
+    <div class="sec-title">公務員ならではの<br>お金の悩み</div>
+    <div class="sec-line"></div>
+    <div class="worries-grid">
+      <article class="glass-card worry-card">
+        <span class="worry-icon">😟</span>
+        <p>「共済があるから大丈夫」と思っていたけど、保障が手薄だった</p>
+      </article>
+      <article class="glass-card worry-card">
+        <span class="worry-icon">🤔</span>
+        <p>NISAやiDeCoを始めたいけど、何から手をつければいいかわからない</p>
+      </article>
+      <article class="glass-card worry-card">
+        <span class="worry-icon">😰</span>
+        <p>退職金の受け取り方で税金が変わると聞いたけど、詳しくない</p>
+      </article>
+      <article class="glass-card worry-card">
+        <span class="worry-icon">😣</span>
+        <p>マイホームを買いたいが、教育費や老後資金との両立が不安</p>
+      </article>
     </div>
+    <p class="worries-lead">そのお悩み、<strong>Life Villageにまとめてご相談ください。</strong></p>
   </section>
 
   <!-- ③ サービス概要 -->
-  <section class="section">
-    <div class="inner">
-      <span class="sec-label">Services</span>
-      <h2 class="sec-title">4つの領域を<br>ワンストップでサポート</h2>
-      <div class="sec-line"></div>
-      <p class="sec-desc">保険・資産形成・退職金・ライフプランを、<br>公務員専門の相談窓口がまとめて対応します。</p>
-      <div class="services-grid">
-        <div class="service-card glass-card">
-          <span class="service-icon">🛡️</span>
-          <h3>保険の見直し</h3>
-          <p>共済との重複を確認し、本当に必要な保障だけに最適化。生命・医療・がん保険をトータル提案。</p>
-        </div>
-        <div class="service-card glass-card">
-          <span class="service-icon">📈</span>
-          <h3>資産形成・NISA/iDeCo</h3>
-          <p>公務員向けiDeCoの活用法からつみたてNISAの設定まで、効率的な資産形成をサポート。</p>
-        </div>
-        <div class="service-card glass-card">
-          <span class="service-icon">🏦</span>
-          <h3>退職金・共済の活用</h3>
-          <p>退職金の最適な受け取り方・共済年金との組み合わせで、老後も安心できる資金計画を設計。</p>
-        </div>
-        <div class="service-card glass-card">
-          <span class="service-icon">🗺️</span>
-          <h3>ライフプランニング</h3>
-          <p>住宅購入・教育費・老後資金を総合的に考えたキャッシュフロー計画を一緒に作ります。</p>
-        </div>
-      </div>
+  <section class="section section--features">
+    <div class="deco-circle features__deco-1" aria-hidden="true"></div>
+    <div class="deco-circle features__deco-2" aria-hidden="true"></div>
+    <span class="sec-label">Services</span>
+    <div class="sec-title">4つの領域を<br>ワンストップでサポート</div>
+    <div class="sec-line"></div>
+    <p class="sec-desc">保険・資産形成・退職金・ライフプランを、<br>公務員専門の相談窓口がまとめて対応します。</p>
+    <div class="features__grid">
+      <article class="glass-card features__card">
+        <div class="features__icon">🛡️</div>
+        <div class="features__title">保険の見直し</div>
+        <p class="features__desc">共済との重複を確認し、本当に必要な保障だけに最適化。生命・医療・がん保険をトータル提案。</p>
+      </article>
+      <article class="glass-card features__card">
+        <div class="features__icon">📈</div>
+        <div class="features__title">資産形成・NISA/iDeCo</div>
+        <p class="features__desc">公務員向けiDeCoの活用法からつみたてNISAの設定まで、効率的な資産形成をサポート。</p>
+      </article>
+      <article class="glass-card features__card">
+        <div class="features__icon">🏦</div>
+        <div class="features__title">退職金・共済の活用</div>
+        <p class="features__desc">退職金の最適な受け取り方・共済年金との組み合わせで、老後も安心できる資金計画を設計。</p>
+      </article>
+      <article class="glass-card features__card">
+        <div class="features__icon">🗺️</div>
+        <div class="features__title">ライフプランニング</div>
+        <p class="features__desc">住宅購入・教育費・老後資金を総合的に考えたキャッシュフロー計画を一緒に作ります。</p>
+      </article>
     </div>
   </section>
 
   <!-- ④ 公務員特化の理由 -->
+  <section class="section section--reasons">
+    <div class="deco-circle reasons__deco-1" aria-hidden="true"></div>
+    <div class="deco-circle reasons__deco-2" aria-hidden="true"></div>
+    <span class="sec-label">Why Life Village</span>
+    <div class="sec-title">一般のFP相談と<br>何が違うのか</div>
+    <div class="sec-line"></div>
+    <div class="reasons-list">
+      <article class="glass-card reason-card">
+        <div class="reason-header">
+          <div class="reason-num">01</div>
+          <div class="reason-title">共済制度を熟知した提案</div>
+        </div>
+        <p class="reason-desc">一般の相談窓口では見落としがちな共済の保障内容を把握した上で、重複なく最適な設計をご提案します。</p>
+      </article>
+      <article class="glass-card reason-card">
+        <div class="reason-header">
+          <div class="reason-num">02</div>
+          <div class="reason-title">公務員向け制度に精通</div>
+        </div>
+        <p class="reason-desc">iDeCoの活用法、公務員向け住宅ローン優遇など、公務員特有の制度知識を持つ専門家が対応します。</p>
+      </article>
+      <article class="glass-card reason-card">
+        <div class="reason-header">
+          <div class="reason-num">03</div>
+          <div class="reason-title">職種・年代・家族構成に合わせた個別相談</div>
+        </div>
+        <p class="reason-desc">教員・地方公務員・国家公務員など職種によって制度が異なります。あなたの状況に最適なプランをご提案します。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ⑤ 相談の流れ -->
+  <section class="section section--flow flow">
+    <div class="deco-circle flow__deco-1" aria-hidden="true"></div>
+    <div class="deco-circle flow__deco-2" aria-hidden="true"></div>
+    <span class="sec-label">Flow</span>
+    <div class="sec-title">ご相談の流れ</div>
+    <div class="sec-line"></div>
+    <ol class="flow__steps">
+      <li class="flow__step">
+        <div class="flow__num" aria-label="ステップ1">01</div>
+        <div class="glass-card flow__body">
+          <div class="flow__title">5問の無料診断（約1分）</div>
+          <p class="flow__desc">職種・年代・家族構成と気になることを選ぶだけ。難しい知識は不要です。</p>
+        </div>
+      </li>
+      <li class="flow__step">
+        <div class="flow__num" aria-label="ステップ2">02</div>
+        <div class="glass-card flow__body">
+          <div class="flow__title">診断結果で相談領域が決まる</div>
+          <p class="flow__desc">保険・資産形成・退職金・ライフプランの中から、今の優先度が高い領域をご提示します。</p>
+        </div>
+      </li>
+      <li class="flow__step">
+        <div class="flow__num" aria-label="ステップ3">03</div>
+        <div class="glass-card flow__body">
+          <div class="flow__title">ヒアリング・個別プランのご提案</div>
+          <p class="flow__desc">診断結果をもとに、公務員制度に精通した専門家が無料でご相談をお受けします。</p>
+        </div>
+      </li>
+      <li class="flow__step">
+        <div class="flow__num" aria-label="ステップ4">04</div>
+        <div class="glass-card flow__body">
+          <div class="flow__title">ご検討・アフターサポート</div>
+          <p class="flow__desc">ご提案内容をゆっくりご確認いただけます。ご不明点は何度でもご相談OKです。</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ⑥ FAQ -->
   <section class="section section--green">
-    <div class="inner">
-      <span class="sec-label">Why Life Village</span>
-      <h2 class="sec-title">一般のFP相談と<br>何が違うのか</h2>
-      <div class="sec-line"></div>
-      <div class="reasons-list">
-        <div class="reason-item">
-          <span class="reason-num">01</span>
-          <div>
-            <h3>共済制度を熟知した提案</h3>
-            <p>一般の相談窓口では見落としがちな共済の保障内容を把握した上で、重複なく最適な設計をご提案します。</p>
-          </div>
-        </div>
-        <div class="reason-item">
-          <span class="reason-num">02</span>
-          <div>
-            <h3>公務員向け制度に精通</h3>
-            <p>iDeCoの活用法、公務員向け住宅ローン優遇など、公務員特有の制度知識を持つ専門家が対応します。</p>
-          </div>
-        </div>
-        <div class="reason-item">
-          <span class="reason-num">03</span>
-          <div>
-            <h3>職種・年代・家族構成に合わせた個別相談</h3>
-            <p>教員・地方公務員・国家公務員など職種によって制度が異なります。あなたの状況に最適なプランをご提案します。</p>
-          </div>
-        </div>
+    <div class="deco-circle worries__deco-1" aria-hidden="true"></div>
+    <div class="deco-circle worries__deco-2" aria-hidden="true"></div>
+    <span class="sec-label">FAQ</span>
+    <div class="sec-title">よくある質問</div>
+    <div class="sec-line"></div>
+    <div class="faq-list">
+      <details class="faq-item glass-card">
+        <summary>本当に無料ですか？</summary>
+        <p>はい、完全無料です。相談料・診断料は一切かかりません。収益は保険・金融商品の販売手数料・アフィリエイトで成り立っています。ご加入いただかなくても費用は発生しません。</p>
+      </details>
+      <details class="faq-item glass-card">
+        <summary>保険以外の相談もできますか？</summary>
+        <p>はい、NISA・iDeCo・退職金・住宅購入・教育費・家計の見直しなど、お金に関することであれば幅広くご相談いただけます。まず診断で優先領域を確認するのがおすすめです。</p>
+      </details>
+      <details class="faq-item glass-card">
+        <summary>どんな職種でも相談できますか？</summary>
+        <p>教員・地方公務員・国家公務員・みなし公務員など、幅広い職種の方にご対応しています。職種によって共済や制度が異なりますので、お気軽にご相談ください。</p>
+      </details>
+      <details class="faq-item glass-card">
+        <summary>オンラインで相談できますか？</summary>
+        <p>はい、Zoom・LINEビデオ通話など、オンラインでのご相談に対応しています。全国どこからでもご利用いただけます。</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ⑦ 最終CTA -->
+  <section class="cta-wrap">
+    <div class="cta" id="consultation">
+      <div class="cta__deco cta__deco--1" aria-hidden="true"></div>
+      <div class="cta__deco cta__deco--2" aria-hidden="true"></div>
+      <span class="cta__chip">Free Consultation</span>
+      <div class="cta__title">公務員のお金、<br>まるごと相談しよう</div>
+      <ul class="cta__checks">
+        <li><span class="cta__check-icon">✓</span>保険・NISA・退職金・ライフプランを一括サポート</li>
+        <li><span class="cta__check-icon">✓</span>オンライン相談対応・転勤中もOK</li>
+        <li><span class="cta__check-icon">✓</span>無理な勧誘は一切ありません</li>
+      </ul>
+      <div class="cta__btns">
+        <a href="https://life.tech-village.co.jp/diagnosis" class="cta__btn-primary">今すぐ無料診断する →</a>
+        <a href="https://life.tech-village.co.jp/consultation/" class="cta__btn-ghost">まず相談してみる</a>
       </div>
     </div>
   </section>
 
-  <!-- ⑤ 診断への誘導（中間CTA） -->
-  <section class="section diagnosis-cta-section">
-    <div class="deco-circle" style="width:300px;height:300px;top:-80px;right:-80px;background:rgba(255,255,255,0.05)"></div>
-    <div class="inner text-center">
-      <span class="sec-label">Free Diagnosis</span>
-      <h2 class="sec-title">まず、あなたに合った<br>相談領域を診断しよう</h2>
-      <div class="sec-line"></div>
-      <p class="sec-desc">5問に答えるだけで、今のあなたに必要な<br>お金の相談領域がわかります。</p>
-      <a href="https://life.tech-village.co.jp/diagnosis" class="btn-primary">
-        無料診断を始める →
-      </a>
-      <p class="cta-note" style="margin-top:12px;color:rgba(255,255,255,0.6);">完全無料・登録不要・約1分</p>
-    </div>
-  </section>
+  <footer class="footer">
+    <div class="footer__logo">Life <span>Village</span></div>
+    <p class="footer__tagline">公務員専門マネー相談窓口</p>
+    <hr class="footer__divider">
+    <nav class="footer__links" aria-label="フッターナビゲーション">
+      <a href="https://life.tech-village.co.jp/diagnosis">無料診断を始める</a>
+      <a href="https://life.tech-village.co.jp/consultation/">無料で相談する</a>
+      <a href="https://tech-village.co.jp/" target="_blank" rel="noopener noreferrer">運営会社</a>
+    </nav>
+    <p class="footer__copy">© Life Village All Rights Reserved.</p>
+  </footer>
 
-  <!-- ⑥ 相談の流れ -->
-  <section class="section">
-    <div class="inner">
-      <span class="sec-label">Flow</span>
-      <h2 class="sec-title">相談の流れ</h2>
-      <div class="sec-line"></div>
-      <div class="flow-steps">
-        <div class="flow-step">
-          <div class="flow-num">1</div>
-          <h3>5問の無料診断（約1分）</h3>
-          <p>職種・年代・家族構成と気になることを選ぶだけ。難しい知識は不要です。</p>
-        </div>
-        <div class="flow-arrow">↓</div>
-        <div class="flow-step">
-          <div class="flow-num">2</div>
-          <h3>診断結果で相談領域が決まる</h3>
-          <p>保険・資産形成・退職金・ライフプランの中から、今の優先度が高い領域をご提示します。</p>
-        </div>
-        <div class="flow-arrow">↓</div>
-        <div class="flow-step">
-          <div class="flow-num">3</div>
-          <h3>専門家が個別にご提案</h3>
-          <p>診断結果をもとに、公務員制度に精通した専門家が無料でご相談をお受けします。</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('is-visible');
+          observer.unobserve(el.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
-  <!-- ⑦ FAQ -->
-  <section class="section section--green">
-    <div class="inner">
-      <span class="sec-label">FAQ</span>
-      <h2 class="sec-title">よくある質問</h2>
-      <div class="sec-line"></div>
-      <div class="faq-list">
-        <details class="faq-item glass-card">
-          <summary>本当に無料ですか？</summary>
-          <p>はい、完全無料です。相談料・診断料は一切かかりません。収益は保険・金融商品の販売手数料・アフィリエイトで成り立っています。ご加入いただかなくても費用は発生しません。</p>
-        </details>
-        <details class="faq-item glass-card">
-          <summary>保険に加入しないといけませんか？</summary>
-          <p>いいえ、加入の義務はありません。相談のみでも歓迎です。あなたにとって最善の選択肢をご提案しますので、納得された場合のみご検討ください。</p>
-        </details>
-        <details class="faq-item glass-card">
-          <summary>どんな職種でも相談できますか？</summary>
-          <p>教員・地方公務員・国家公務員・みなし公務員など、幅広い職種の方にご対応しています。職種によって共済や制度が異なりますので、お気軽にご相談ください。</p>
-        </details>
-        <details class="faq-item glass-card">
-          <summary>オンラインで相談できますか？</summary>
-          <p>はい、Zoom・LINEビデオ通話など、オンラインでのご相談に対応しています。全国どこからでもご利用いただけます。</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑧ 最終CTA -->
-  <section class="section final-cta-section">
-    <div class="deco-circle" style="width:400px;height:400px;top:-100px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.04)"></div>
-    <div class="inner text-center">
-      <h2 class="final-cta-title">公務員のお金、<br>まるごと相談しよう</h2>
-      <p class="final-cta-sub">完全無料・登録不要・5問で診断完了</p>
-      <a href="https://life.tech-village.co.jp/diagnosis" class="btn-primary btn-large">
-        今すぐ無料診断する →
-      </a>
-      <p style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:20px;">
-        Life Village — 公務員専門マネー相談窓口
-      </p>
-    </div>
-  </section>
-
+    document.querySelectorAll([
+      '.glass-card',
+      '.sec-label',
+      '.sec-title',
+      '.sec-line',
+      '.sec-desc',
+      '.flow__step',
+      '.cta__chip',
+      '.cta__title',
+      '.cta__checks',
+      '.worries-lead',
+    ].join(',')).forEach((el, i) => {
+      el.classList.add('anim-fade');
+      el.style.transitionDelay = (i % 4) * 0.08 + 's';
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
