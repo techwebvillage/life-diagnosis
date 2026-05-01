@@ -3,14 +3,14 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import type { DiagnosisAxis } from '@/lib/diagnosis/types'
+import type { DiagnosisType } from '@/lib/diagnosis/types'
+import { DEFAULT_TYPE } from '@/lib/diagnosis/types'
 
 const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL ?? 'https://lin.ee/XXXXXXX'
 const STORAGE_KEY = 'lv_quiz_result'
 
 type QuizResult = {
-  type: DiagnosisAxis
-  displayScore: number
+  type: DiagnosisType
 }
 
 export default function PreviewPage() {
@@ -25,12 +25,9 @@ export default function PreviewPage() {
       if (
         typeof parsed === 'object' &&
         parsed !== null &&
-        typeof (parsed as QuizResult).displayScore === 'number' &&
         typeof (parsed as QuizResult).type === 'string'
       ) {
-        const score = (parsed as QuizResult).displayScore
-        const type = (parsed as QuizResult).type as DiagnosisAxis
-        setResult({ type, displayScore: Math.max(80, Math.min(100, score)) })
+        setResult({ type: (parsed as QuizResult).type })
       }
     } catch {
       sessionStorage.removeItem(STORAGE_KEY)
@@ -38,7 +35,7 @@ export default function PreviewPage() {
   }, [])
 
   function handleViewResult() {
-    const type = result?.type ?? 'L'
+    const type = result?.type ?? DEFAULT_TYPE
     router.push(`/diagnosis/result?type=${type}`)
   }
 
@@ -90,10 +87,7 @@ export default function PreviewPage() {
 
               <div className="border-t my-4" style={{ borderColor: 'rgba(27,94,32,0.12)' }} />
 
-              <button
-                onClick={handleViewResult}
-                className="btn-primary w-full py-4 text-sm"
-              >
+              <button onClick={handleViewResult} className="btn-primary w-full py-4 text-sm">
                 診断結果を見る →
               </button>
             </>

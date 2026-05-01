@@ -1,39 +1,21 @@
 // components/diagnosis/ResultCard.tsx
 
-import {
-  DIAGNOSIS_TYPES,
-  AXIS_LABELS,
-  RISK_LEVEL_LABELS,
-  RISK_LEVEL_WIDTHS,
-} from '@/lib/diagnosis/types'
-import type { DiagnosisAxis } from '@/lib/diagnosis/types'
-
-const AXIS_COLORS: Record<DiagnosisAxis, string> = {
-  L: 'linear-gradient(90deg, #1b5e20, #43a047)',
-  M: 'linear-gradient(90deg, #006064, #26c6da)',
-  F: 'linear-gradient(90deg, #e65100, #ff9800)',
-}
+import { DIAGNOSIS_TYPES } from '@/lib/diagnosis/types'
+import type { DiagnosisType } from '@/lib/diagnosis/types'
 
 type Props = {
-  type: DiagnosisAxis
-  displayScore: number
+  type: DiagnosisType
   consultationUrl: string
   lineUrl: string
 }
 
-export default function ResultCard({ type, displayScore, consultationUrl, lineUrl }: Props) {
+export default function ResultCard({ type, consultationUrl, lineUrl }: Props) {
   const def = DIAGNOSIS_TYPES[type]
 
   return (
     <div className="flex flex-col gap-4">
       <div className="text-center">
-        <span
-          className="inline-block text-white text-xs font-bold px-3 py-1 rounded-full mb-2"
-          style={{ background: '#1b5e20', letterSpacing: '1px' }}
-        >
-          {type} タイプ
-        </span>
-        <div className="text-3xl mb-1">{def.icon}</div>
+        <div className="text-4xl mb-2">{def.icon}</div>
         <h2 className="text-xl font-black" style={{ color: '#1b5e20' }}>
           {def.name}
         </h2>
@@ -43,49 +25,31 @@ export default function ResultCard({ type, displayScore, consultationUrl, lineUr
         {def.description}
       </p>
 
-      <p className="text-xs font-bold text-center" style={{ color: '#2e7d32' }}>
-        推奨：{def.recommendation}
-      </p>
-
-      <div className="flex flex-col gap-2">
-        {(Object.keys(def.risks) as DiagnosisAxis[]).map((axis) => {
-          const level = def.risks[axis]
-          return (
-            <div key={axis}>
-              <div className="flex justify-between text-xs mb-1" style={{ color: '#666' }}>
-                <span>{AXIS_LABELS[axis]}</span>
-                <span style={{ color: '#1b5e20', fontWeight: 700 }}>{RISK_LEVEL_LABELS[level]}</span>
-              </div>
-              <div
-                className="h-2 rounded-full w-full"
-                style={{ background: 'rgba(27,94,32,0.1)' }}
-              >
-                <div
-                  className="h-2 rounded-full transition-all duration-500"
-                  style={{
-                    width: RISK_LEVEL_WIDTHS[level],
-                    background: AXIS_COLORS[axis],
-                  }}
-                />
-              </div>
-            </div>
-          )
-        })}
-      </div>
-
-      <div className="text-center py-2">
-        <p className="text-xs mb-1" style={{ color: '#888' }}>適合スコア</p>
-        <p className="text-4xl font-black" style={{ color: '#1b5e20' }}>
-          {displayScore}
-          <span className="text-base font-normal ml-1" style={{ color: '#888' }}>点</span>
+      <div className="rounded-xl px-4 py-3" style={{ background: 'rgba(27,94,32,0.06)' }}>
+        <p className="text-xs font-bold mb-1" style={{ color: '#2e7d32' }}>
+          おすすめの相談内容
+        </p>
+        <p className="text-sm font-black" style={{ color: '#1b5e20' }}>
+          {def.recommendation}
         </p>
       </div>
 
+      <div className="flex flex-col gap-1.5">
+        {def.points.map((point) => (
+          <div key={point} className="flex items-start gap-2 text-sm" style={{ color: '#444' }}>
+            <span className="font-black flex-shrink-0" style={{ color: '#43a047' }}>
+              ✓
+            </span>
+            <span>{point}</span>
+          </div>
+        ))}
+      </div>
+
       <a
-        href={consultationUrl}
+        href={`${consultationUrl}?type=${type}`}
         className="btn-primary block w-full text-center py-4 text-sm"
       >
-        無料相談を申し込む →
+        この結果をもとに無料相談する →
       </a>
       <a
         href={lineUrl}

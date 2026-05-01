@@ -1,15 +1,12 @@
 // app/diagnosis/result/page.tsx
 
-import type { DiagnosisAxis } from '@/lib/diagnosis/types'
-import { DISPLAY_SCORE_BY_TYPE } from '@/lib/diagnosis/types'
+import type { DiagnosisType } from '@/lib/diagnosis/types'
+import { VALID_TYPES, DEFAULT_TYPE } from '@/lib/diagnosis/types'
 import ResultCard from '@/components/diagnosis/ResultCard'
 
 const CONSULTATION_URL =
   process.env.NEXT_PUBLIC_CONSULTATION_URL ?? 'https://life.tech-village.co.jp/contact/'
 const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL ?? 'https://lin.ee/XXXXXXX'
-
-const VALID_TYPES: DiagnosisAxis[] = ['L', 'M', 'F']
-const DEFAULT_TYPE: DiagnosisAxis = 'L'
 
 type Props = {
   searchParams: Promise<{ type?: string }>
@@ -18,12 +15,10 @@ type Props = {
 export default async function ResultPage({ searchParams }: Props) {
   const params = await searchParams
   const rawType = params.type?.toUpperCase()
-  const type: DiagnosisAxis =
+  const type: DiagnosisType =
     rawType && (VALID_TYPES as string[]).includes(rawType)
-      ? (rawType as DiagnosisAxis)
+      ? (rawType as DiagnosisType)
       : DEFAULT_TYPE
-
-  const displayScore = DISPLAY_SCORE_BY_TYPE[type]
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
@@ -47,12 +42,7 @@ export default async function ResultPage({ searchParams }: Props) {
             backdropFilter: 'blur(14px)',
           }}
         >
-          <ResultCard
-            type={type}
-            displayScore={displayScore}
-            consultationUrl={CONSULTATION_URL}
-            lineUrl={LINE_URL}
-          />
+          <ResultCard type={type} consultationUrl={CONSULTATION_URL} lineUrl={LINE_URL} />
         </div>
       </div>
     </main>
