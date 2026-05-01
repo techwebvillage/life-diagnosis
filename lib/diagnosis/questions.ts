@@ -1,59 +1,58 @@
 // lib/diagnosis/questions.ts
 
-import type { DiagnosisAxis } from './types'
-
-export type AnswerOption = {
-  label: string
-  score: number
-}
-
-export type Question = {
+export type SingleSelectQuestion = {
   id: number
   text: string
-  axis: DiagnosisAxis | DiagnosisAxis[]
+  type: 'single'
+  options: string[]
 }
 
-export const ANSWER_OPTIONS: AnswerOption[] = [
-  { label: 'とても思う', score: 3 },
-  { label: 'まあ思う', score: 2 },
-  { label: 'あまり思わない', score: 1 },
-  { label: '全く思わない', score: 0 },
-]
+export type MultiSelectQuestion = {
+  id: number
+  text: string
+  type: 'multi'
+  options: string[]
+}
+
+export type Question = SingleSelectQuestion | MultiSelectQuestion
 
 export const QUESTIONS: Question[] = [
   {
     id: 1,
-    text: '配偶者やお子様など、あなたの収入に頼っている家族がいますか？',
-    axis: 'L',
+    text: 'あなたの職種を教えてください',
+    type: 'single',
+    options: ['教員', '地方公務員', '国家公務員', 'その他（公務員）'],
   },
   {
     id: 2,
-    text: '病気やケガで長期入院になった場合の医療費が心配ですか？',
-    axis: 'M',
+    text: '年代を教えてください',
+    type: 'single',
+    options: ['20代', '30代', '40代', '50代'],
   },
   {
     id: 3,
-    text: '老後の生活資金について、今から備えておきたいと感じますか？',
-    axis: 'F',
+    text: '家族構成を教えてください',
+    type: 'single',
+    options: ['独身', '既婚・子なし', '既婚・子あり'],
   },
   {
     id: 4,
-    text: '万が一のとき、家族の生活を守れるか不安がありますか？',
-    axis: 'L',
+    text: '今、気になっていることを選んでください（複数可）',
+    type: 'multi',
+    options: [
+      '保険の見直し',
+      '老後資金',
+      '資産運用',
+      '住宅購入',
+      '退職金・共済の活用',
+      '家計の見直し',
+      '子どもの教育費',
+    ],
   },
   {
     id: 5,
-    text: '現在の医療・入院への備えが不十分だと感じることがありますか？',
-    axis: 'M',
-  },
-  {
-    id: 6,
-    text: '将来受け取れる公的年金だけでは生活が不安だと思いますか？',
-    axis: 'F',
-  },
-  {
-    id: 7,
-    text: '今の保険をプロに相談・見直ししてみたいと思いますか？',
-    axis: ['L', 'M', 'F'],
+    text: 'お金の備えについて、今の状況を教えてください',
+    type: 'single',
+    options: ['何もしていない', '少し始めた', '見直したい'],
   },
 ]
