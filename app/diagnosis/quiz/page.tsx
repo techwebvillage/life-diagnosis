@@ -4,7 +4,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { QUESTIONS } from '@/lib/diagnosis/questions'
-import { calcAxisScores, determineType, calcDisplayScore } from '@/lib/diagnosis/scoring'
+import { determineType } from '@/lib/diagnosis/scoring'
 import ProgressBar from '@/components/diagnosis/ProgressBar'
 import QuizCard from '@/components/diagnosis/QuizCard'
 
@@ -13,19 +13,17 @@ const STORAGE_KEY = 'lv_quiz_result'
 export default function QuizPage() {
   const router = useRouter()
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [answers, setAnswers] = useState<number[]>([])
+  const [answers, setAnswers] = useState<string[][]>([])
 
-  function handleAnswer(score: number) {
-    const newAnswers = [...answers, score]
+  function handleAnswer(answer: string[]) {
+    const newAnswers = [...answers, answer]
 
     if (newAnswers.length === QUESTIONS.length) {
       setAnswers(newAnswers)
       try {
-        const axisScores = calcAxisScores(newAnswers)
-        const type = determineType(axisScores)
-        const displayScore = calcDisplayScore(newAnswers)
+        const type = determineType(newAnswers)
         try {
-          sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ type, displayScore }))
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ type }))
         } catch {
           // プライベートブラウジング時は無視
         }
@@ -60,7 +58,7 @@ export default function QuizPage() {
             backdropFilter: 'blur(14px)',
           }}
         >
-          <QuizCard question={question} onAnswer={handleAnswer} />
+          <QuizCard key={currentIndex} question={question} onAnswer={handleAnswer} />
         </div>
       </div>
     </main>
