@@ -300,10 +300,13 @@ button { cursor: pointer; font-family: inherit; border: none; }
 .worry-card {
   padding: 22px 18px;
 }
-.worry-icon {
-  display: block;
-  font-size: 24px;
-  margin-bottom: 8px;
+.worry-num {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--green-vivid);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
 }
 .worry-card p {
   font-size: 12px;
@@ -348,9 +351,16 @@ button { cursor: pointer; font-family: inherit; border: none; }
 .features__card {
   padding: 22px 18px;
 }
-.features__icon {
-  font-size: 32px;
+.features__tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--green-forest);
+  background: rgba(46,125,50,0.1);
+  border-radius: 6px;
+  padding: 4px 10px;
   margin-bottom: 12px;
+  letter-spacing: 0.5px;
 }
 .features__title {
   font-size: 13px;
@@ -599,15 +609,13 @@ button { cursor: pointer; font-family: inherit; border: none; }
   margin-bottom: 10px;
 }
 .cta__check-icon {
-  width: 24px; height: 24px;
   flex-shrink: 0;
   background: rgba(255,255,255,0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
+  border-radius: 20px;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 900;
+  white-space: nowrap;
 }
 .cta__btns {
   display: flex;
@@ -845,7 +853,7 @@ button { cursor: pointer; font-family: inherit; border: none; }
         <a href="https://life.tech-village.co.jp/diagnosis" class="btn-primary">今すぐ無料診断する →</a>
         <a href="https://life.tech-village.co.jp/consultation/" class="btn-ghost">まず相談してみる</a>
       </div>
-      <p class="hero__note">✓ ご相談・ご診断はすべて無料です</p>
+      <p class="hero__note">ご相談・ご診断はすべて無料です</p>
     </div>
   </section>
 
@@ -858,19 +866,19 @@ button { cursor: pointer; font-family: inherit; border: none; }
     <div class="sec-line"></div>
     <div class="worries-grid">
       <article class="glass-card worry-card">
-        <span class="worry-icon">😟</span>
+        <span class="worry-num">01</span>
         <p>「共済があるから大丈夫」と思っていたけど、保障が手薄だった</p>
       </article>
       <article class="glass-card worry-card">
-        <span class="worry-icon">🤔</span>
+        <span class="worry-num">02</span>
         <p>NISAやiDeCoを始めたいけど、何から手をつければいいかわからない</p>
       </article>
       <article class="glass-card worry-card">
-        <span class="worry-icon">😰</span>
+        <span class="worry-num">03</span>
         <p>退職金の受け取り方で税金が変わると聞いたけど、詳しくない</p>
       </article>
       <article class="glass-card worry-card">
-        <span class="worry-icon">😣</span>
+        <span class="worry-num">04</span>
         <p>マイホームを買いたいが、教育費や老後資金との両立が不安</p>
       </article>
     </div>
@@ -887,22 +895,22 @@ button { cursor: pointer; font-family: inherit; border: none; }
     <p class="sec-desc">保険・資産形成・退職金・ライフプランを、<br>公務員専門の相談窓口がまとめて対応します。</p>
     <div class="features__grid">
       <article class="glass-card features__card">
-        <div class="features__icon">🛡️</div>
+        <div class="features__tag">保険</div>
         <div class="features__title">保険の見直し</div>
         <p class="features__desc">共済との重複を確認し、本当に必要な保障だけに最適化。生命・医療・がん保険をトータル提案。</p>
       </article>
       <article class="glass-card features__card">
-        <div class="features__icon">📈</div>
+        <div class="features__tag">資産形成</div>
         <div class="features__title">資産形成・NISA/iDeCo</div>
         <p class="features__desc">公務員向けiDeCoの活用法からつみたてNISAの設定まで、効率的な資産形成をサポート。</p>
       </article>
       <article class="glass-card features__card">
-        <div class="features__icon">🏦</div>
+        <div class="features__tag">退職金</div>
         <div class="features__title">退職金・共済の活用</div>
         <p class="features__desc">退職金の最適な受け取り方・共済年金との組み合わせで、老後も安心できる資金計画を設計。</p>
       </article>
       <article class="glass-card features__card">
-        <div class="features__icon">🗺️</div>
+        <div class="features__tag">ライフプラン</div>
         <div class="features__title">ライフプランニング</div>
         <p class="features__desc">住宅購入・教育費・老後資金を総合的に考えたキャッシュフロー計画を一緒に作ります。</p>
       </article>
@@ -1015,9 +1023,9 @@ button { cursor: pointer; font-family: inherit; border: none; }
       <span class="cta__chip">Free Consultation</span>
       <div class="cta__title">公務員のお金、<br>まるごと相談しよう</div>
       <ul class="cta__checks">
-        <li><span class="cta__check-icon">✓</span>保険・NISA・退職金・ライフプランを一括サポート</li>
-        <li><span class="cta__check-icon">✓</span>オンライン相談対応・転勤中もOK</li>
-        <li><span class="cta__check-icon">✓</span>無理な勧誘は一切ありません</li>
+        <li><span class="cta__check-icon">無料</span>保険・NISA・退職金・ライフプランを一括サポート</li>
+        <li><span class="cta__check-icon">全国</span>オンライン相談対応・転勤中もOK</li>
+        <li><span class="cta__check-icon">安心</span>無理な勧誘は一切ありません</li>
       </ul>
       <div class="cta__btns">
         <a href="https://life.tech-village.co.jp/diagnosis" class="cta__btn-primary">今すぐ無料診断する →</a>
