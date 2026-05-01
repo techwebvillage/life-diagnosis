@@ -1,35 +1,34 @@
 // lib/diagnosis/scoring.ts
 
-import { QUESTIONS } from './questions'
-import type { DiagnosisAxis } from './types'
+import type { DiagnosisType } from './types'
 
-export type AxisScores = Record<DiagnosisAxis, number>
-
-const TYPE_PRIORITY: DiagnosisAxis[] = ['L', 'M', 'F']
-const SCORE_MIN = 80
-const SCORE_MAX = 100
-const RAW_MAX = 21 // 7問 × 3点
-
-export function calcAxisScores(answers: number[]): AxisScores {
-  const scores: AxisScores = { L: 0, M: 0, F: 0 }
-  answers.forEach((score, index) => {
-    const question = QUESTIONS[index]
-    const axes = Array.isArray(question.axis) ? question.axis : [question.axis]
-    axes.forEach((axis) => {
-      scores[axis] += score
-    })
-  })
-  return scores
+const CONCERN_TO_TYPE: Record<string, DiagnosisType> = {
+  '保険の見直し': 'INSURANCE',
+  '老後資金': 'PENSION',
+  '資産運用': 'ASSET',
+  '住宅購入': 'LIFEPLAN',
+  '退職金・共済の活用': 'PENSION',
+  '家計の見直し': 'LIFEPLAN',
+  '子どもの教育費': 'LIFEPLAN',
 }
 
-export function determineType(axisScores: AxisScores): DiagnosisAxis {
-  const maxScore = Math.max(...Object.values(axisScores))
-  const type = TYPE_PRIORITY.find((axis) => axisScores[axis] === maxScore)
-  if (!type) throw new Error(`determineType: no matching axis in scores ${JSON.stringify(axisScores)}`)
-  return type
-}
+const TYPE_PRIORITY: DiagnosisType[] = ['PENSION', 'INSURANCE', 'ASSET', 'LIFEPLAN']
 
-export function calcDisplayScore(answers: number[]): number {
-  const rawTotal = answers.reduce((sum, s) => sum + s, 0)
-  return Math.round(SCORE_MIN + (rawTotal / RAW_MAX) * (SCORE_MAX - SCORE_MIN))
+const CONCERN_QUESTION_INDEX = 3
+
+export function determineType(answers: string[][]): DiagnosisType {
+  const concerns = answers[CONCERN_QUESTION_INDEX] ?? []
+  const counts: Record<DiagnosisType, number> = {
+    INSURANCE: 0,
+    ASSET: 0,
+    PENSION: 0,
+    LIFEPLAN: 0,
+  }
+  for (const concern of concerns) {
+    const t = CONCERN_TO_TYPE[concern]
+    if (t) counts[t]++
+  }
+  const maxCount = Math.max(...Object.values(counts))
+  if (maxCount === 0) return 'LIFEPLAN'
+  return TYPE_PRIORITY.find((t) => counts[t] === maxCount) ?? 'LIFEPLAN'
 }
