@@ -789,17 +789,18 @@ button { cursor: pointer; font-family: inherit; border: none; }
 
   .hero {
     min-height: 700px;
-    padding: 96px 120px 96px;
+    padding: 96px max(80px, calc(50% - 700px)) 96px;
   }
   .hero__title   { font-size: 48px; }
   .hero__content { max-width: 46%; }
   .hero__blob--1 { width: 620px; height: 640px; right: -100px; }
   .hero__pill    { font-size: 14px; }
-  .hero__pill--1 { top: 110px; right: 120px; }
-  .hero__pill--2 { top: 168px; right: 136px; }
-  .hero__pill--3 { top: 226px; right: 120px; }
+  .hero__pill--1 { top: 110px; right: max(80px, calc(50% - 700px)); }
+  .hero__pill--2 { top: 168px; right: calc(max(80px, calc(50% - 700px)) + 16px); }
+  .hero__pill--3 { top: 226px; right: max(80px, calc(50% - 700px)); }
 
-  .section { padding: 96px 120px; }
+  .section  { padding: 96px max(80px, calc(50% - 700px)); }
+  .nav      { padding: 14px max(24px, calc(50% - 700px)); }
 
   .features__grid { grid-template-columns: repeat(4, 1fr); }
   .flow__steps    { max-width: 800px; margin: 0 auto; }
@@ -811,12 +812,12 @@ button { cursor: pointer; font-family: inherit; border: none; }
   }
 
   .cta      { padding: 64px 80px; }
-  .cta-wrap { padding: 80px 120px; }
+  .cta-wrap { padding: 80px max(80px, calc(50% - 700px)); }
   .cta__btns { flex-direction: row; }
   .cta__btn-primary { flex: 1; }
   .cta__btn-ghost   { flex: 1; }
 
-  .footer { padding: 60px 120px 40px; }
+  .footer { padding: 60px max(80px, calc(50% - 700px)) 40px; }
 }
   </style>
 </head>
