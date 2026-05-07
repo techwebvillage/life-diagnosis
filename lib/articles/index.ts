@@ -1,11 +1,18 @@
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
 import type { Article, ArticleMeta } from './types'
 
 export type { Article, ArticleMeta }
 
 const articlesDir = path.join(process.cwd(), 'content', 'articles')
+
+function parseMdx(raw: string): { title: string; description: string; content: string } {
+  const lines = raw.split('\n')
+  const title = lines[0]?.trim() ?? ''
+  const description = lines[1]?.trim() ?? ''
+  const content = lines.slice(2).join('\n').trimStart()
+  return { title, description, content }
+}
 
 export async function getAllArticles(): Promise<ArticleMeta[]> {
   if (!fs.existsSync(articlesDir)) return []
@@ -23,14 +30,8 @@ export async function getAllArticles(): Promise<ArticleMeta[]> {
     for (const filename of files) {
       const slug = filename.replace(/\.mdx$/, '')
       const raw = fs.readFileSync(path.join(categoryPath, filename), 'utf-8')
-      const { data } = matter(raw)
-
-      articles.push({
-        slug,
-        category,
-        title: data.title ?? '',
-        description: data.description ?? '',
-      })
+      const { title, description } = parseMdx(raw)
+      articles.push({ slug, category, title, description })
     }
   }
 
@@ -50,15 +51,10 @@ export async function getArticleBySlug(
   if (!fs.existsSync(filePath)) return null
 
   const raw = fs.readFileSync(filePath, 'utf-8')
-  const { data, content } = matter(raw)
+  const { title, description, content } = parseMdx(raw)
 
   return {
-    frontmatter: {
-      slug,
-      category,
-      title: data.title ?? '',
-      description: data.description ?? '',
-    },
+    frontmatter: { slug, category, title, description },
     content,
   }
 }

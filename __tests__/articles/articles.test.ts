@@ -4,16 +4,14 @@ import { getAllArticles, getArticleBySlug, getArticlesByCategory } from '@/lib/a
 jest.mock('fs')
 const mockFs = fs as jest.Mocked<typeof fs>
 
-const SAMPLE_MDX = `---
-title: "共済と民間保険の違い"
-description: "公務員が知るべき保険の基礎知識"
----
+const SAMPLE_MDX = `共済と民間保険の違い
+公務員が知るべき保険の基礎知識
+
 本文テキスト`
 
-const SAMPLE_MDX_2 = `---
-title: "つみたてNISAの始め方"
-description: "公務員向けNISA活用ガイド"
----
+const SAMPLE_MDX_2 = `つみたてNISAの始め方
+公務員向けNISA活用ガイド
+
 本文テキスト2`
 
 beforeEach(() => {
