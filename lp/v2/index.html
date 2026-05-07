@@ -868,6 +868,65 @@ button { cursor: pointer; font-family: inherit; border: none; }
   .footer__links a { font-size: 14px; }
   .footer__copy    { font-size: 13px; }
 }
+
+/* ── 記事バナー ── */
+.media-banner {
+  background: #fff;
+  border-top: 3px solid var(--green-vivid);
+  padding: 20px 24px;
+}
+.media-banner__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+.media-banner__icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--green-deep), var(--green-forest));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.media-banner__body { flex: 1; min-width: 0; }
+.media-banner__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--green-vivid);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.media-banner__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+.media-banner__sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.media-banner__arrow {
+  font-size: 18px;
+  color: var(--green-forest);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.media-banner__inner:hover .media-banner__arrow { transform: translateX(4px); }
+@media (max-width: 480px) {
+  .media-banner { padding: 16px 20px; }
+  .media-banner__inner { gap: 14px; }
+  .media-banner__icon { width: 44px; height: 44px; font-size: 20px; border-radius: 10px; }
+}
   </style>
 </head>
 <body>
@@ -904,6 +963,18 @@ button { cursor: pointer; font-family: inherit; border: none; }
       <p class="hero__note">ご相談・ご診断はすべて無料です</p>
     </div>
   </section>
+
+  <a href="https://life.tech-village.co.jp/?page_id=181" class="media-banner">
+    <div class="media-banner__inner">
+      <div class="media-banner__icon">💰</div>
+      <div class="media-banner__body">
+        <p class="media-banner__label">MONEY GUIDE</p>
+        <p class="media-banner__title">公務員のお金関係の記事はこちらでまとめています</p>
+        <p class="media-banner__sub">節税・保険・資産形成・ライフプランなど、テーマ別に解説</p>
+      </div>
+      <span class="media-banner__arrow">→</span>
+    </div>
+  </a>
 
   <!-- ② 課題提起 -->
   <section class="section section--green">
