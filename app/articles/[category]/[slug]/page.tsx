@@ -56,23 +56,15 @@ export default async function ArticlePage({ params }: Props) {
         {frontmatter.title}
       </h1>
 
-      <div className="mt-2 flex flex-wrap gap-1">
-        {frontmatter.tags.map((tag) => (
-          <span
-            key={tag}
-            className="text-xs text-green-600 bg-green-50 rounded-full px-2 py-0.5"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+      <p className="mt-2 text-sm text-gray-500">{frontmatter.description}</p>
 
-      <p className="mt-1 text-xs text-gray-400">{frontmatter.publishedAt}</p>
+      <p className="mt-2 text-xs text-gray-400">{frontmatter.publishedAt}</p>
 
       <ArticleBody>
         <MDXRemote
           source={content}
           options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+          components={{ hr: () => null }}
         />
       </ArticleBody>
 
