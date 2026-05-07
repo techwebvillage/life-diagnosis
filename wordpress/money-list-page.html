@@ -1,0 +1,133 @@
+<style>
+/* ===== Life Village / 公務員のお金 カテゴリーページ ===== */
+.lvm-wrap { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif; color: #333; line-height: 1.6; --green: #1b5e20; --green-mid: #2e7d32; --green-light: #43a047; --green-pale: #e8f5e9; --green-pale2: #f1f8f4; --muted: #666; --border: #d4e8d4; }
+
+/* ===== TOP: ヒーロー ===== */
+.lvm-hero { background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #388e3c 100%); padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+.lvm-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.lvm-hero__inner { max-width: 760px; margin: 0 auto; position: relative; }
+.lvm-hero__badge { display: inline-block; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 3px; padding: 5px 16px; border-radius: 20px; margin-bottom: 20px; }
+.lvm-hero__title { font-size: 28px; font-weight: 800; color: #fff; line-height: 1.45; margin: 0 0 16px; }
+.lvm-hero__sub { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.9; margin: 0 0 28px; }
+.lvm-hero__tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.lvm-hero__tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35); color: #fff; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 20px; }
+
+/* ===== TOP: 説明帯 ===== */
+.lvm-intro { background: var(--green-pale2); border-bottom: 1px solid var(--border); padding: 20px 24px; }
+.lvm-intro__inner { max-width: 760px; margin: 0 auto; display: flex; align-items: flex-start; gap: 12px; }
+.lvm-intro__icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.lvm-intro__text { font-size: 13px; color: #444; line-height: 1.8; }
+.lvm-intro__text strong { color: var(--green); }
+
+/* ===== BOTTOM: テーマ別ガイド ===== */
+.lvm-bottom { background: var(--green-pale2); border-top: 1px solid var(--border); padding: 48px 24px; }
+.lvm-bottom__inner { max-width: 760px; margin: 0 auto; }
+.lvm-bottom__label { font-size: 11px; letter-spacing: 3px; color: var(--green-light); font-weight: 700; text-align: center; margin-bottom: 6px; }
+.lvm-bottom__title { font-size: 20px; font-weight: 800; color: var(--green); text-align: center; margin: 0 0 6px; }
+.lvm-bottom__sub { font-size: 13px; color: var(--muted); text-align: center; margin: 0 0 28px; }
+.lvm-topics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 36px; }
+.lvm-topic { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 20px 16px; text-decoration: none; display: block; transition: box-shadow 0.2s, transform 0.2s; }
+.lvm-topic:hover { box-shadow: 0 6px 20px rgba(27,94,32,0.12); transform: translateY(-2px); }
+.lvm-topic__icon { font-size: 28px; margin-bottom: 10px; display: block; }
+.lvm-topic__name { font-size: 14px; font-weight: 800; color: var(--green); margin: 0 0 6px; }
+.lvm-topic__desc { font-size: 12px; color: var(--muted); line-height: 1.7; margin: 0; }
+
+/* ===== BOTTOM: CTA ===== */
+.lvm-cta { background: linear-gradient(135deg, #1b5e20, #2e7d32); border-radius: 12px; padding: 32px 24px; text-align: center; }
+.lvm-cta__title { color: #fff; font-size: 17px; font-weight: 800; margin: 0 0 8px; }
+.lvm-cta__sub { color: rgba(255,255,255,0.8); font-size: 13px; margin: 0 0 20px; line-height: 1.7; }
+.lvm-cta__btn { display: inline-block; background: #fff; color: var(--green); font-weight: 800; font-size: 14px; padding: 12px 36px; border-radius: 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 640px) {
+  .lvm-hero { padding: 40px 20px 36px; }
+  .lvm-hero__title { font-size: 21px; }
+  .lvm-intro__inner { flex-direction: column; gap: 8px; }
+  .lvm-topics { grid-template-columns: repeat(2, 1fr); }
+  .lvm-bottom { padding: 36px 16px; }
+}
+@media (max-width: 400px) {
+  .lvm-topics { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- ===================== TOP ===================== -->
+<div class="lvm-wrap">
+
+  <div class="lvm-hero">
+    <div class="lvm-hero__inner">
+      <div class="lvm-hero__badge">CIVIL SERVANT MONEY GUIDE</div>
+      <h1 class="lvm-hero__title">公務員のお金を増やす・守る<br>完全ガイド</h1>
+      <p class="lvm-hero__sub">節税・資産形成・保険・ライフプランまで、公務員が知っておくべきお金の知識を体系的に解説します。ふるさと納税・NISA・iDeCo など、公務員だからこそ活用できる制度も網羅。</p>
+      <div class="lvm-hero__tags">
+        <span class="lvm-hero__tag">ふるさと納税</span>
+        <span class="lvm-hero__tag">NISA・iDeCo</span>
+        <span class="lvm-hero__tag">節税</span>
+        <span class="lvm-hero__tag">資産形成</span>
+        <span class="lvm-hero__tag">保険</span>
+        <span class="lvm-hero__tag">ライフプラン</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="lvm-intro">
+    <div class="lvm-intro__inner">
+      <span class="lvm-intro__icon">📌</span>
+      <p class="lvm-intro__text">このページでは、<strong>公務員のお金に関する記事</strong>をまとめています。安定した収入がある公務員だからこそ、正しい知識で<strong>節税・資産形成・リスク管理</strong>を実践することが長期的な豊かさにつながります。気になるテーマの記事をご覧ください。</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== BOTTOM ===================== -->
+<div class="lvm-wrap">
+
+  <div class="lvm-bottom">
+    <div class="lvm-bottom__inner">
+      <p class="lvm-bottom__label">TOPICS</p>
+      <h2 class="lvm-bottom__title">テーマ別ガイド</h2>
+      <p class="lvm-bottom__sub">気になるテーマから記事を探してみましょう</p>
+
+      <div class="lvm-topics">
+        <a href="https://life.tech-village.co.jp/?cat=tax" class="lvm-topic">
+          <span class="lvm-topic__icon">📋</span>
+          <p class="lvm-topic__name">節税・ふるさと納税</p>
+          <p class="lvm-topic__desc">ふるさと納税の上限額・手続き・節税テクニックを解説</p>
+        </a>
+        <a href="https://life.tech-village.co.jp/?cat=investment" class="lvm-topic">
+          <span class="lvm-topic__icon">📈</span>
+          <p class="lvm-topic__name">NISA・iDeCo・投資</p>
+          <p class="lvm-topic__desc">公務員が使える資産形成制度と投資の基本を解説</p>
+        </a>
+        <a href="https://life.tech-village.co.jp/?cat=insurance" class="lvm-topic">
+          <span class="lvm-topic__icon">🛡️</span>
+          <p class="lvm-topic__name">保険の見直し</p>
+          <p class="lvm-topic__desc">公務員向け共済・民間保険の適切な組み合わせを解説</p>
+        </a>
+        <a href="https://life.tech-village.co.jp/?cat=life-plan" class="lvm-topic">
+          <span class="lvm-topic__icon">🏠</span>
+          <p class="lvm-topic__name">ライフプラン</p>
+          <p class="lvm-topic__desc">住宅購入・結婚・子育て・老後資金の計画づくり</p>
+        </a>
+        <a href="https://life.tech-village.co.jp/?cat=money-basics" class="lvm-topic">
+          <span class="lvm-topic__icon">💡</span>
+          <p class="lvm-topic__name">お金の基礎知識</p>
+          <p class="lvm-topic__desc">給与明細の見方から家計管理まで基礎をしっかり解説</p>
+        </a>
+        <a href="https://life.tech-village.co.jp/" class="lvm-topic">
+          <span class="lvm-topic__icon">📰</span>
+          <p class="lvm-topic__name">すべての記事を見る</p>
+          <p class="lvm-topic__desc">Life Village の公務員向けライフ情報をまとめて確認</p>
+        </a>
+      </div>
+
+      <div class="lvm-cta">
+        <p class="lvm-cta__title">公務員のライフ情報をもっと読む</p>
+        <p class="lvm-cta__sub">お金・キャリア・暮らしに役立つ情報を<br>公務員目線で発信しています</p>
+        <a href="https://life.tech-village.co.jp/" class="lvm-cta__btn">Life Village トップへ →</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
