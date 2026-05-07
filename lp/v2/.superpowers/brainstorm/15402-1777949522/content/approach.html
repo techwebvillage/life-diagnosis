@@ -1,0 +1,188 @@
+<h2>PC最適化アプローチを選んでください</h2>
+<p class="subtitle">現状: スマホ向けに設計されており、PCでフォント・レイアウトが小さく見える</p>
+
+<style>
+.mockup-mini {
+  font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: #f0f7f1;
+}
+.mockup-mini .m-nav {
+  background: rgba(255,255,255,0.9);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e8f5e9;
+}
+.mockup-mini .m-logo { font-weight: 900; color: #1b5e20; font-size: 12px; }
+.mockup-mini .m-btn { background: #1b5e20; color: #fff; font-size: 9px; padding: 5px 10px; border-radius: 20px; font-weight: 700; }
+.mockup-mini .m-hero { padding: 20px; position: relative; background: #fff; overflow: hidden; }
+.mockup-mini .m-hero-2col { padding: 20px; display: flex; gap: 16px; background: #fff; align-items: center; }
+.mockup-mini .m-hero-text { flex: 1; }
+.mockup-mini .m-hero-visual { flex: 1; position: relative; min-height: 80px; }
+.mockup-mini .m-blob { width: 100%; height: 80px; background: linear-gradient(145deg, #b2dfdb, #a5d6a7); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
+.mockup-mini .m-eyebrow { font-size: 7px; color: #43a047; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.mockup-mini .m-title-sm { font-size: 13px; font-weight: 900; color: #1b5e20; line-height: 1.4; margin: 4px 0; }
+.mockup-mini .m-title-md { font-size: 17px; font-weight: 900; color: #1b5e20; line-height: 1.4; margin: 4px 0; }
+.mockup-mini .m-title-lg { font-size: 22px; font-weight: 900; color: #1b5e20; line-height: 1.4; margin: 4px 0; }
+.mockup-mini .m-desc-sm { font-size: 8px; color: #555; margin: 4px 0 8px; }
+.mockup-mini .m-desc-md { font-size: 10px; color: #555; margin: 4px 0 8px; }
+.mockup-mini .m-desc-lg { font-size: 12px; color: #555; margin: 4px 0 10px; }
+.mockup-mini .m-cta { display: inline-block; background: #1b5e20; color: #fff; font-size: 8px; padding: 6px 12px; border-radius: 20px; font-weight: 700; }
+.mockup-mini .m-cta-lg { font-size: 10px; padding: 8px 16px; }
+.mockup-mini .m-section { padding: 14px 16px; background: #e8f5e9; }
+.mockup-mini .m-section-title-sm { font-size: 11px; font-weight: 900; color: #1b5e20; text-align: center; margin-bottom: 8px; }
+.mockup-mini .m-section-title-md { font-size: 14px; font-weight: 900; color: #1b5e20; text-align: center; margin-bottom: 8px; }
+.mockup-mini .m-section-title-lg { font-size: 18px; font-weight: 900; color: #1b5e20; text-align: center; margin-bottom: 10px; }
+.mockup-mini .m-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.mockup-mini .m-grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+.mockup-mini .m-card { background: rgba(255,255,255,0.7); border-radius: 8px; padding: 8px; }
+.mockup-mini .m-card-sm .m-card-title { font-size: 8px; font-weight: 900; color: #1b5e20; }
+.mockup-mini .m-card-sm .m-card-desc { font-size: 7px; color: #555; margin-top: 3px; }
+.mockup-mini .m-card-lg .m-card-title { font-size: 10px; font-weight: 900; color: #1b5e20; }
+.mockup-mini .m-card-lg .m-card-desc { font-size: 8px; color: #555; margin-top: 4px; }
+.tag { display: inline-block; font-size: 6px; font-weight: 900; color: #2e7d32; background: rgba(46,125,50,0.1); border-radius: 4px; padding: 2px 6px; margin-bottom: 4px; }
+.pill-row { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
+.m-pill { background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9); border-radius: 20px; font-size: 7px; padding: 3px 8px; color: #1b5e20; font-weight: 700; }
+.badge { background: #e8f5e9; color: #1b5e20; font-size: 6px; padding: 2px 5px; border-radius: 4px; display: inline-block; }
+</style>
+
+<div class="options">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>フォント・スペーシング強化</h3>
+      <p>レイアウト構造はそのまま、PC時のフォントサイズ・余白を全面的にスケールアップ。最小変更で最大効果。</p>
+      <div class="mockup-mini">
+        <div class="m-nav"><span class="m-logo">Life Village</span><span class="m-btn">無料診断 →</span></div>
+        <div class="m-hero" style="min-height:90px">
+          <div style="position:absolute;top:-15px;right:-15px;width:100px;height:110px;background:linear-gradient(145deg,#b2dfdb,#a5d6a7);border-radius:40% 60% 55% 45%;opacity:0.9"></div>
+          <div style="max-width:55%">
+            <div class="m-eyebrow">MONEY CONSULTATION</div>
+            <div class="m-title-md">公務員の方、<br>お金の相談、<br>まるごと。</div>
+            <div class="m-desc-md">保険・NISA・退職金・住宅購入…</div>
+            <span class="m-cta">今すぐ無料診断する →</span>
+          </div>
+        </div>
+        <div class="m-section">
+          <div class="m-section-title-md">4つの領域をワンストップでサポート</div>
+          <div class="m-grid-4">
+            <div class="m-card m-card-lg"><div class="tag">保険</div><div class="m-card-title">保険の見直し</div><div class="m-card-desc">共済との重複を確認...</div></div>
+            <div class="m-card m-card-lg"><div class="tag">資産形成</div><div class="m-card-title">NISA/iDeCo</div><div class="m-card-desc">公務員向け活用法...</div></div>
+            <div class="m-card m-card-lg"><div class="tag">退職金</div><div class="m-card-title">退職金・共済</div><div class="m-card-desc">最適な受け取り方...</div></div>
+            <div class="m-card m-card-lg"><div class="tag">ライフ</div><div class="m-card-title">ライフプラン</div><div class="m-card-desc">住宅購入・教育費...</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pros-cons" style="margin-top:10px">
+        <div class="pros"><h4>メリット</h4><ul><li>変更量が最小限</li><li>崩れリスクが低い</li><li>すぐに完了</li></ul></div>
+        <div class="cons"><h4>デメリット</h4><ul><li>PC特有の余白感が薄い</li><li>ヒーローが小さめ</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>PC最適化レイアウト（推奨）</h3>
+      <p>フォント大型化 + ヒーローを左右2カラムに変更。右側にビジュアルパネル（ピル・装飾）を配置し、PC画面を余白なく使い切る。</p>
+      <div class="mockup-mini">
+        <div class="m-nav"><span class="m-logo">Life Village</span><span class="m-btn">無料診断 →</span></div>
+        <div class="m-hero-2col" style="min-height:100px">
+          <div class="m-hero-text">
+            <div class="m-eyebrow">MONEY CONSULTATION</div>
+            <div class="m-title-lg">公務員の方、<br>お金の相談、<br>まるごと。</div>
+            <div class="m-desc-lg">保険・NISA・退職金・住宅購入…<br>共済制度を知り尽くした専門家が解決。</div>
+            <span class="m-cta m-cta-lg">今すぐ無料診断する →</span>
+          </div>
+          <div class="m-hero-visual">
+            <div style="position:absolute;top:-10px;right:-10px;width:130px;height:130px;background:linear-gradient(145deg,#b2dfdb,#a5d6a7);border-radius:40% 60% 55% 45%;opacity:0.9"></div>
+            <div style="position:relative;z-index:2;padding-top:10px;">
+              <div class="pill-row">
+                <div class="m-pill">✦ 相談料 完全無料</div>
+              </div>
+              <div class="pill-row">
+                <div class="m-pill">✦ 公務員専門</div>
+              </div>
+              <div class="pill-row">
+                <div class="m-pill">✦ オンライン対応OK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="m-section">
+          <div class="m-section-title-lg">4つの領域をワンストップでサポート</div>
+          <div class="m-grid-4">
+            <div class="m-card m-card-lg"><div class="tag">保険</div><div class="m-card-title">保険の見直し</div><div class="m-card-desc">共済との重複を確認し最適化。</div></div>
+            <div class="m-card m-card-lg"><div class="tag">資産形成</div><div class="m-card-title">NISA/iDeCo</div><div class="m-card-desc">公務員向け活用法。</div></div>
+            <div class="m-card m-card-lg"><div class="tag">退職金</div><div class="m-card-title">退職金・共済</div><div class="m-card-desc">最適な受け取り方。</div></div>
+            <div class="m-card m-card-lg"><div class="tag">ライフ</div><div class="m-card-title">ライフプラン</div><div class="m-card-desc">総合的なキャッシュフロー。</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pros-cons" style="margin-top:10px">
+        <div class="pros"><h4>メリット</h4><ul><li>PC画面を広く使える</li><li>視覚的に安定感</li><li>テキストが読みやすい</li></ul></div>
+        <div class="cons"><h4>デメリット</h4><ul><li>ヒーローCSS変更が必要</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>フルPC刷新（大型ヒーロー）</h3>
+      <p>ヒーローを大型化し、右側に統計バッジ・信頼ポイントを配置。コンテンツ幅を1440px対応に拡大し、各セクションも余白・フォントを大きく取る。</p>
+      <div class="mockup-mini">
+        <div class="m-nav"><span class="m-logo">Life Village</span><span class="m-btn">無料診断 →</span></div>
+        <div class="m-hero-2col" style="min-height:120px; padding:28px 20px;">
+          <div class="m-hero-text" style="flex:1.2">
+            <div style="display:inline-block;background:#e8f5e9;color:#1b5e20;font-size:7px;padding:3px 8px;border-radius:20px;font-weight:700;margin-bottom:6px;">公務員専門 マネー相談窓口</div>
+            <div class="m-title-lg" style="font-size:26px;line-height:1.3">公務員の方、<br>お金の相談、<br><span style="color:#43a047">まるごと。</span></div>
+            <div class="m-desc-lg" style="font-size:11px;margin:8px 0">保険・NISA・退職金・住宅購入…<br>共済制度を知り尽くした専門家が解決します。</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="m-cta m-cta-lg">今すぐ無料診断する →</span>
+              <span style="display:inline-block;background:rgba(255,255,255,0.7);border:1px solid rgba(46,125,50,0.3);color:#2e7d32;font-size:9px;padding:7px 12px;border-radius:20px;font-weight:700;">まず相談してみる</span>
+            </div>
+          </div>
+          <div class="m-hero-visual" style="flex:1">
+            <div style="position:absolute;top:-20px;right:-15px;width:150px;height:155px;background:linear-gradient(145deg,#b2dfdb,#a5d6a7);border-radius:40% 60% 55% 45%;opacity:0.9"></div>
+            <div style="position:relative;z-index:2;padding:8px 0 0 8px;">
+              <div style="margin-bottom:5px"><div class="m-pill" style="font-size:8px;padding:4px 10px">✦ 相談料 完全無料</div></div>
+              <div style="margin-bottom:5px"><div class="m-pill" style="font-size:8px;padding:4px 10px">✦ 公務員専門の相談窓口</div></div>
+              <div style="margin-bottom:5px"><div class="m-pill" style="font-size:8px;padding:4px 10px">✦ オンライン対応OK</div></div>
+              <div style="display:flex;gap:4px;margin-top:8px">
+                <div style="background:rgba(255,255,255,0.8);border-radius:8px;padding:6px 8px;text-align:center">
+                  <div style="font-size:14px;font-weight:900;color:#1b5e20">500+</div>
+                  <div style="font-size:6px;color:#555">相談実績</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.8);border-radius:8px;padding:6px 8px;text-align:center">
+                  <div style="font-size:14px;font-weight:900;color:#1b5e20">98%</div>
+                  <div style="font-size:6px;color:#555">満足度</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="m-section">
+          <div class="m-section-title-lg" style="font-size:16px">4つの領域をワンストップでサポート</div>
+          <div class="m-grid-4">
+            <div class="m-card m-card-lg"><div class="tag">保険</div><div class="m-card-title">保険の見直し</div><div class="m-card-desc">共済との重複を確認し最適化。</div></div>
+            <div class="m-card m-card-lg"><div class="tag">資産形成</div><div class="m-card-title">NISA/iDeCo</div><div class="m-card-desc">公務員向け活用法。</div></div>
+            <div class="m-card m-card-lg"><div class="tag">退職金</div><div class="m-card-title">退職金・共済</div><div class="m-card-desc">最適な受け取り方。</div></div>
+            <div class="m-card m-card-lg"><div class="tag">ライフ</div><div class="m-card-title">ライフプラン</div><div class="m-card-desc">総合的なキャッシュフロー。</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pros-cons" style="margin-top:10px">
+        <div class="pros"><h4>メリット</h4><ul><li>PC体験が最大化</li><li>信頼感・迫力がある</li><li>競合との差別化</li></ul></div>
+        <div class="cons"><h4>デメリット</h4><ul><li>変更量が多い</li><li>実績数値は仮（要確認）</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>

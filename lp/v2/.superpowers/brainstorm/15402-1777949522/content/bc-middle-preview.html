@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-C中間 PCプレビュー</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Zen Kaku Gothic New', sans-serif; background: #1a1a2e; color: #fff; padding: 24px; }
+h1 { font-size: 20px; font-weight: 900; text-align: center; margin-bottom: 6px; }
+.subtitle { font-size: 13px; color: #aaa; text-align: center; margin-bottom: 24px; }
+.frame-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ccc;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.frame-label span { background: #43a047; color: #fff; padding: 3px 12px; border-radius: 20px; margin-left: 8px; font-size: 11px; }
+.lp-frame {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  margin-bottom: 32px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  color: #222;
+}
+
+/* ── ナビ ── */
+.lp-nav {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(165,214,167,0.35);
+  padding: 16px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.lp-logo { font-size: 22px; font-weight: 900; color: #1b5e20; letter-spacing: 0.5px; }
+.lp-logo span { color: #43a047; }
+.lp-nav-btn {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 12px 26px;
+  border-radius: 36px;
+  box-shadow: 0 8px 28px rgba(27,94,32,0.38);
+}
+
+/* ── ヒーロー（B-C中間：左テキスト＋右絶対配置ブロブ＋大型フォント） ── */
+.lp-hero {
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 60px 88px;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+}
+.lp-hero__blob-1 {
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 540px; height: 560px;
+  background: linear-gradient(145deg, #b2dfdb 0%, #a5d6a7 50%, #81c784 100%);
+  border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
+  opacity: 0.9;
+}
+.lp-hero__blob-2 {
+  position: absolute;
+  bottom: -60px; right: -10px;
+  width: 240px; height: 260px;
+  background: linear-gradient(145deg, #c8e6c9, #a5d6a7);
+  border-radius: 40% 60% 40% 60%;
+  opacity: 0.55;
+}
+.lp-hero__pill {
+  position: absolute;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.95);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1b5e20;
+  padding: 11px 22px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  z-index: 3;
+}
+.lp-hero__pill-dot { width: 9px; height: 9px; background: #43a047; border-radius: 50%; flex-shrink: 0; }
+.lp-hero__pill--1 { top: 100px; right: 60px; }
+.lp-hero__pill--2 { top: 152px; right: 76px; }
+.lp-hero__pill--3 { top: 204px; right: 60px; }
+
+.lp-hero__content { position: relative; z-index: 2; max-width: 52%; }
+.lp-hero__eyebrow {
+  display: block;
+  font-size: 12px; font-weight: 700; color: #43a047;
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.lp-hero__title {
+  font-size: 52px; font-weight: 900; color: #1b5e20;
+  line-height: 1.38; margin-bottom: 20px;
+}
+.lp-hero__line {
+  width: 40px; height: 3px;
+  background: linear-gradient(90deg, #43a047, #66bb6a);
+  border-radius: 2px; margin-bottom: 20px;
+}
+.lp-hero__desc {
+  font-size: 17px; color: #555;
+  line-height: 1.9; margin-bottom: 32px;
+}
+.lp-hero__ctas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.lp-btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  color: #fff; font-size: 16px; font-weight: 900;
+  padding: 17px 34px; border-radius: 36px;
+  box-shadow: 0 8px 28px rgba(27,94,32,0.38);
+}
+.lp-btn-ghost {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.6);
+  color: #2e7d32; font-size: 15px; font-weight: 700;
+  padding: 15px 28px; border-radius: 36px;
+  border: 1.5px solid rgba(46,125,50,0.3);
+}
+.lp-hero__note { font-size: 13px; color: #888; }
+
+/* ── セクション共通 ── */
+.lp-section {
+  padding: 88px 60px;
+}
+.lp-section--green {
+  background: linear-gradient(160deg, #e8f5e9 0%, #dcedc8 60%, #c8e6c9 100%);
+}
+.lp-section--features {
+  background: linear-gradient(160deg, #dcedc8 0%, #c8e6c9 50%, #b2dfdb 100%);
+}
+.lp-sec-label {
+  display: block; font-size: 12px; font-weight: 700;
+  color: #43a047; letter-spacing: 3px; text-transform: uppercase;
+  text-align: center; margin-bottom: 10px;
+}
+.lp-sec-title {
+  font-size: 34px; font-weight: 900; color: #1b5e20;
+  text-align: center; line-height: 1.4; margin-bottom: 10px;
+}
+.lp-sec-line {
+  width: 32px; height: 3px;
+  background: linear-gradient(90deg, #43a047, #66bb6a);
+  border-radius: 2px; margin: 0 auto 32px;
+}
+.lp-sec-desc {
+  font-size: 16px; color: #555;
+  line-height: 1.9; text-align: center; margin-bottom: 36px;
+}
+
+/* ── 課題グリッド（4列化） ── */
+.lp-worries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.lp-worry-card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.85);
+  border-radius: 20px;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+  padding: 26px 22px;
+}
+.lp-worry-num { display: inline-block; font-size: 12px; font-weight: 900; color: #43a047; letter-spacing: 1px; margin-bottom: 12px; }
+.lp-worry-card p { font-size: 14px; color: #555; line-height: 1.8; }
+.lp-worries-lead { font-size: 17px; color: #555; text-align: center; line-height: 1.8; }
+.lp-worries-lead strong { color: #1b5e20; font-weight: 900; }
+
+/* ── Features 4列 ── */
+.lp-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.lp-feat-card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.85);
+  border-radius: 20px;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+  padding: 28px 24px;
+}
+.lp-feat-tag {
+  display: inline-block; font-size: 11px; font-weight: 900;
+  color: #2e7d32; background: rgba(46,125,50,0.1);
+  border-radius: 6px; padding: 5px 12px; margin-bottom: 14px;
+}
+.lp-feat-title { font-size: 16px; font-weight: 900; color: #1b5e20; margin-bottom: 10px; line-height: 1.4; }
+.lp-feat-desc { font-size: 13px; color: #555; line-height: 1.8; }
+
+/* ── 変更サマリー ── */
+.changes {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 24px 32px;
+  margin-top: 32px;
+}
+.changes h3 { font-size: 16px; font-weight: 900; color: #43a047; margin-bottom: 16px; }
+.change-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
+.change-item { font-size: 13px; color: #ddd; display: flex; gap: 8px; align-items: flex-start; }
+.change-item::before { content: '✦'; color: #43a047; flex-shrink: 0; margin-top: 1px; }
+.note { font-size: 12px; color: #888; margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; }
+</style>
+</head>
+<body>
+
+<h1>B-C中間アプローチ — PCプレビュー</h1>
+<p class="subtitle">スマホ・タブレットは変更なし。1200px以上のPC表示のみ更新。</p>
+
+<div class="frame-label">PC表示イメージ（1200px以上）<span>実際のレイアウト</span></div>
+
+<div class="lp-frame">
+
+  <!-- ナビ -->
+  <nav class="lp-nav">
+    <div class="lp-logo">Life <span>Village</span></div>
+    <a class="lp-nav-btn">無料診断を始める →</a>
+  </nav>
+
+  <!-- ヒーロー -->
+  <section class="lp-hero">
+    <div class="lp-hero__blob-1"></div>
+    <div class="lp-hero__blob-2"></div>
+    <div class="lp-hero__pill lp-hero__pill--1"><span class="lp-hero__pill-dot"></span>相談料 完全無料</div>
+    <div class="lp-hero__pill lp-hero__pill--2"><span class="lp-hero__pill-dot"></span>公務員専門の相談窓口</div>
+    <div class="lp-hero__pill lp-hero__pill--3"><span class="lp-hero__pill-dot"></span>オンライン対応OK</div>
+    <div class="lp-hero__content">
+      <span class="lp-hero__eyebrow">Money Consultation for Civil Servants</span>
+      <h1 class="lp-hero__title">公務員の方、<br>お金の相談、<br>まるごと。</h1>
+      <div class="lp-hero__line"></div>
+      <p class="lp-hero__desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
+      <div class="lp-hero__ctas">
+        <a class="lp-btn-primary">今すぐ無料診断する →</a>
+        <a class="lp-btn-ghost">まず相談してみる</a>
+      </div>
+      <p class="lp-hero__note">ご相談・ご診断はすべて無料です</p>
+    </div>
+  </section>
+
+  <!-- 課題提起（4列化） -->
+  <section class="lp-section lp-section--green">
+    <span class="lp-sec-label">こんな悩みはありませんか？</span>
+    <div class="lp-sec-title">公務員ならではの<br>お金の悩み</div>
+    <div class="lp-sec-line"></div>
+    <div class="lp-worries-grid">
+      <article class="lp-worry-card"><span class="lp-worry-num">01</span><p>「共済があるから大丈夫」と思っていたけど、保障が手薄だった</p></article>
+      <article class="lp-worry-card"><span class="lp-worry-num">02</span><p>NISAやiDeCoを始めたいけど、何から手をつければいいかわからない</p></article>
+      <article class="lp-worry-card"><span class="lp-worry-num">03</span><p>退職金の受け取り方で税金が変わると聞いたけど、詳しくない</p></article>
+      <article class="lp-worry-card"><span class="lp-worry-num">04</span><p>マイホームを買いたいが、教育費や老後資金との両立が不安</p></article>
+    </div>
+    <p class="lp-worries-lead">そのお悩み、<strong>Life Villageにまとめてご相談ください。</strong></p>
+  </section>
+
+  <!-- サービス概要 -->
+  <section class="lp-section lp-section--features">
+    <span class="lp-sec-label">Services</span>
+    <div class="lp-sec-title">4つの領域を<br>ワンストップでサポート</div>
+    <div class="lp-sec-line"></div>
+    <p class="lp-sec-desc">保険・資産形成・退職金・ライフプランを、公務員専門の相談窓口がまとめて対応します。</p>
+    <div class="lp-features-grid">
+      <article class="lp-feat-card"><div class="lp-feat-tag">保険</div><div class="lp-feat-title">保険の見直し</div><p class="lp-feat-desc">共済との重複を確認し、本当に必要な保障だけに最適化。生命・医療・がん保険をトータル提案。</p></article>
+      <article class="lp-feat-card"><div class="lp-feat-tag">資産形成</div><div class="lp-feat-title">資産形成・NISA/iDeCo</div><p class="lp-feat-desc">公務員向けiDeCoの活用法からつみたてNISAの設定まで、効率的な資産形成をサポート。</p></article>
+      <article class="lp-feat-card"><div class="lp-feat-tag">退職金</div><div class="lp-feat-title">退職金・共済の活用</div><p class="lp-feat-desc">退職金の最適な受け取り方・共済年金との組み合わせで、老後も安心できる資金計画を設計。</p></article>
+      <article class="lp-feat-card"><div class="lp-feat-tag">ライフプラン</div><div class="lp-feat-title">ライフプランニング</div><p class="lp-feat-desc">住宅購入・教育費・老後資金を総合的に考えたキャッシュフロー計画を一緒に作ります。</p></article>
+    </div>
+  </section>
+
+</div>
+
+<!-- 変更サマリー -->
+<div class="changes">
+  <h3>PC（1200px以上）のみ適用する変更内容</h3>
+  <div class="change-grid">
+    <div class="change-item">ヒーロータイトル 48px → 52px</div>
+    <div class="change-item">本文テキスト 14px → 17px</div>
+    <div class="change-item">CTAボタン横並び（現状は縦積み）</div>
+    <div class="change-item">セクションタイトル 28px → 34px</div>
+    <div class="change-item">課題グリッド 2列 → 4列</div>
+    <div class="change-item">eyebrow文字 9px → 12px</div>
+    <div class="change-item">ナビロゴ 18px → 22px</div>
+    <div class="change-item">カード内テキスト全体を拡大</div>
+    <div class="change-item">FAQテキスト 14px → 17px</div>
+    <div class="change-item">CTAセクションタイトル 22px → 32px</div>
+    <div class="change-item">ピル 14px → 15px、余白拡大</div>
+    <div class="change-item">フッターテキスト全体を拡大</div>
+  </div>
+  <p class="note">※スマホ・タブレット（768px未満 / 768〜1199px）の表示は一切変更しません</p>
+</div>
+
+</body>
+</html>

@@ -30,13 +30,11 @@ export async function getAllArticles(): Promise<ArticleMeta[]> {
         category,
         title: data.title ?? '',
         description: data.description ?? '',
-        tags: data.tags ?? [],
-        publishedAt: data.publishedAt ?? '',
       })
     }
   }
 
-  return articles.sort((a, b) => (a.publishedAt >= b.publishedAt ? -1 : 1))
+  return articles
 }
 
 export async function getArticlesByCategory(categorySlug: string): Promise<ArticleMeta[]> {
@@ -60,8 +58,6 @@ export async function getArticleBySlug(
       category,
       title: data.title ?? '',
       description: data.description ?? '',
-      tags: data.tags ?? [],
-      publishedAt: data.publishedAt ?? '',
     },
     content,
   }

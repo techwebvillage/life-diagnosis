@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC最適化アプローチ比較</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 32px 24px;
+}
+h1 {
+  font-size: 22px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 6px;
+  color: #fff;
+}
+.subtitle {
+  font-size: 14px;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { transform: translateY(-4px); border-color: #43a047; }
+.card.selected { border-color: #43a047; box-shadow: 0 0 0 4px rgba(67,160,71,0.3); }
+.card-label {
+  background: #1b5e20;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card-label .letter {
+  background: #fff;
+  color: #1b5e20;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+/* ── 共通ナビ ── */
+.m-nav {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e8f5e9;
+}
+.m-logo { font-weight: 900; color: #1b5e20; }
+.m-nav-btn {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  color: #fff;
+  border-radius: 30px;
+  font-weight: 700;
+  padding: 8px 18px;
+  white-space: nowrap;
+}
+
+/* ── A: 現状スケールアップ ── */
+.hero-a {
+  background: #fff;
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+}
+.hero-a .blob {
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 240px; height: 260px;
+  background: linear-gradient(145deg, #b2dfdb, #a5d6a7);
+  border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
+  opacity: 0.9;
+}
+.hero-a .content { position: relative; z-index: 2; max-width: 55%; }
+.hero-a .eyebrow { font-size: 11px; font-weight: 700; color: #43a047; letter-spacing: 3px; text-transform: uppercase; }
+.hero-a .title { font-size: 36px; font-weight: 900; color: #1b5e20; line-height: 1.4; margin: 10px 0; }
+.hero-a .desc { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 20px; }
+.hero-a .cta { display: inline-block; background: #1b5e20; color: #fff; font-size: 15px; font-weight: 900; padding: 14px 28px; border-radius: 30px; }
+
+/* ── B: 2カラムヒーロー ── */
+.hero-b {
+  background: #fff;
+  padding: 40px 32px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  min-height: 220px;
+}
+.hero-b .left { flex: 1; }
+.hero-b .right { flex: 1; position: relative; }
+.hero-b .blob {
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 260px; height: 280px;
+  background: linear-gradient(145deg, #b2dfdb, #a5d6a7);
+  border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
+  opacity: 0.9;
+}
+.hero-b .pills { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; padding-top: 16px; }
+.hero-b .pill {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 30px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1b5e20;
+  display: flex; align-items: center; gap: 8px;
+  width: fit-content;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.hero-b .pill-dot { width: 8px; height: 8px; background: #43a047; border-radius: 50%; }
+.hero-b .eyebrow { font-size: 11px; font-weight: 700; color: #43a047; letter-spacing: 3px; text-transform: uppercase; }
+.hero-b .title { font-size: 42px; font-weight: 900; color: #1b5e20; line-height: 1.4; margin: 10px 0; }
+.hero-b .desc { font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 20px; }
+.hero-b .cta { display: inline-block; background: #1b5e20; color: #fff; font-size: 15px; font-weight: 900; padding: 14px 28px; border-radius: 30px; }
+
+/* ── C: フル刷新 ── */
+.hero-c {
+  background: linear-gradient(160deg, #fff 0%, #f0f7f1 100%);
+  padding: 48px 36px;
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-c .left { flex: 1.2; position: relative; z-index: 2; }
+.hero-c .right { flex: 1; position: relative; }
+.hero-c .blob {
+  position: absolute;
+  top: -60px; right: -50px;
+  width: 280px; height: 300px;
+  background: linear-gradient(145deg, #b2dfdb, #a5d6a7);
+  border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
+  opacity: 0.9;
+}
+.hero-c .badge {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #1b5e20;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.hero-c .title { font-size: 48px; font-weight: 900; color: #1b5e20; line-height: 1.35; margin-bottom: 16px; }
+.hero-c .title span { color: #43a047; }
+.hero-c .desc { font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 24px; }
+.hero-c .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-c .cta-main { background: #1b5e20; color: #fff; font-size: 16px; font-weight: 900; padding: 16px 30px; border-radius: 32px; }
+.hero-c .cta-sub { background: rgba(255,255,255,0.8); border: 1.5px solid rgba(46,125,50,0.3); color: #2e7d32; font-size: 14px; font-weight: 700; padding: 14px 24px; border-radius: 32px; }
+.hero-c .pills { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; padding-top: 10px; }
+.hero-c .pill {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.95);
+  border-radius: 30px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1b5e20;
+  display: flex; align-items: center; gap: 8px;
+  width: fit-content;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.hero-c .pill-dot { width: 8px; height: 8px; background: #43a047; border-radius: 50%; }
+.stats { display: flex; gap: 8px; margin-top: 16px; position: relative; z-index: 2; }
+.stat-box { background: rgba(255,255,255,0.9); border-radius: 12px; padding: 12px 16px; text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
+.stat-num { font-size: 24px; font-weight: 900; color: #1b5e20; }
+.stat-label { font-size: 11px; color: #555; margin-top: 2px; }
+
+/* ── セクション共通 ── */
+.section-block {
+  background: #e8f5e9;
+  padding: 24px 28px;
+}
+.sec-title { font-size: 20px; font-weight: 900; color: #1b5e20; text-align: center; margin-bottom: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.feat-card { background: rgba(255,255,255,0.75); border-radius: 12px; padding: 16px; }
+.feat-tag { display: inline-block; font-size: 11px; font-weight: 900; color: #2e7d32; background: rgba(46,125,50,0.1); border-radius: 6px; padding: 4px 10px; margin-bottom: 8px; }
+.feat-title { font-size: 14px; font-weight: 900; color: #1b5e20; margin-bottom: 6px; }
+.feat-desc { font-size: 12px; color: #555; line-height: 1.7; }
+
+/* ── 選択UI ── */
+.card-footer {
+  background: #f5f5f5;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-footer .label { font-size: 12px; color: #666; }
+.card-footer .check { width: 24px; height: 24px; border: 2px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.card.selected .card-footer .check { background: #43a047; border-color: #43a047; color: #fff; }
+
+/* ── 送信ボタン ── */
+.submit-area {
+  text-align: center;
+  margin-top: 32px;
+}
+.submit-btn {
+  background: #43a047;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 900;
+  padding: 16px 48px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.selected-label {
+  font-size: 14px;
+  color: #aaa;
+  margin-top: 12px;
+}
+</style>
+</head>
+<body>
+
+<h1>PC最適化 — アプローチ比較</h1>
+<p class="subtitle">ヒーローセクションと主要セクションのPC表示イメージ。クリックで選択してください。</p>
+
+<div class="cards">
+
+  <!-- A -->
+  <div class="card" id="card-a" onclick="select('a')">
+    <div class="card-label">
+      <div class="letter">A</div>
+      フォント・スペーシング強化のみ
+    </div>
+    <div class="m-nav">
+      <span class="m-logo" style="font-size:16px">Life <span style="color:#43a047">Village</span></span>
+      <span class="m-nav-btn" style="font-size:12px">無料診断を始める →</span>
+    </div>
+    <div class="hero-a">
+      <div class="blob"></div>
+      <div class="content">
+        <div class="eyebrow">Money Consultation for Civil Servants</div>
+        <div class="title">公務員の方、<br>お金の相談、<br>まるごと。</div>
+        <p class="desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
+        <a class="cta">今すぐ無料診断する →</a>
+      </div>
+    </div>
+    <div class="section-block">
+      <div class="sec-title" style="font-size:18px">4つの領域をワンストップでサポート</div>
+      <div class="grid-4">
+        <div class="feat-card"><div class="feat-tag">保険</div><div class="feat-title">保険の見直し</div><div class="feat-desc">共済との重複を確認し、本当に必要な保障だけに最適化。</div></div>
+        <div class="feat-card"><div class="feat-tag">資産形成</div><div class="feat-title">NISA/iDeCo</div><div class="feat-desc">公務員向けiDeCoの活用法からつみたてNISAの設定まで。</div></div>
+        <div class="feat-card"><div class="feat-tag">退職金</div><div class="feat-title">退職金・共済</div><div class="feat-desc">退職金の最適な受け取り方・共済年金との組み合わせ。</div></div>
+        <div class="feat-card"><div class="feat-tag">ライフ</div><div class="feat-title">ライフプラン</div><div class="feat-desc">住宅購入・教育費・老後資金を総合的に考えたプラン。</div></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="label">現状のレイアウトを維持し、文字・余白だけ大きくする</span>
+      <div class="check">✓</div>
+    </div>
+  </div>
+
+  <!-- B -->
+  <div class="card" id="card-b" onclick="select('b')">
+    <div class="card-label">
+      <div class="letter">B</div>
+      ヒーロー2カラム化（推奨）
+    </div>
+    <div class="m-nav">
+      <span class="m-logo" style="font-size:16px">Life <span style="color:#43a047">Village</span></span>
+      <span class="m-nav-btn" style="font-size:12px">無料診断を始める →</span>
+    </div>
+    <div class="hero-b">
+      <div class="left">
+        <div class="eyebrow">Money Consultation for Civil Servants</div>
+        <div class="title">公務員の方、<br>お金の相談、<br>まるごと。</div>
+        <p class="desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
+        <a class="cta">今すぐ無料診断する →</a>
+      </div>
+      <div class="right">
+        <div class="blob"></div>
+        <div class="pills">
+          <div class="pill"><div class="pill-dot"></div>相談料 完全無料</div>
+          <div class="pill"><div class="pill-dot"></div>公務員専門の相談窓口</div>
+          <div class="pill"><div class="pill-dot"></div>オンライン対応OK</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-block">
+      <div class="sec-title" style="font-size:20px">4つの領域をワンストップでサポート</div>
+      <div class="grid-4">
+        <div class="feat-card"><div class="feat-tag">保険</div><div class="feat-title">保険の見直し</div><div class="feat-desc">共済との重複を確認し、本当に必要な保障だけに最適化。</div></div>
+        <div class="feat-card"><div class="feat-tag">資産形成</div><div class="feat-title">NISA/iDeCo</div><div class="feat-desc">公務員向けiDeCoの活用法からつみたてNISAの設定まで。</div></div>
+        <div class="feat-card"><div class="feat-tag">退職金</div><div class="feat-title">退職金・共済</div><div class="feat-desc">退職金の最適な受け取り方・共済年金との組み合わせ。</div></div>
+        <div class="feat-card"><div class="feat-tag">ライフ</div><div class="feat-title">ライフプラン</div><div class="feat-desc">住宅購入・教育費・老後資金を総合的に考えたプラン。</div></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="label">左テキスト＋右ビジュアルのPC定番レイアウト</span>
+      <div class="check">✓</div>
+    </div>
+  </div>
+
+  <!-- C -->
+  <div class="card" id="card-c" onclick="select('c')">
+    <div class="card-label">
+      <div class="letter">C</div>
+      フルPC刷新（大型ヒーロー）
+    </div>
+    <div class="m-nav">
+      <span class="m-logo" style="font-size:16px">Life <span style="color:#43a047">Village</span></span>
+      <span class="m-nav-btn" style="font-size:12px">無料診断を始める →</span>
+    </div>
+    <div class="hero-c">
+      <div class="left">
+        <div class="badge">公務員専門 マネー相談窓口</div>
+        <div class="title">公務員の方、<br>お金の相談、<br><span>まるごと。</span></div>
+        <p class="desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
+        <div class="btns">
+          <a class="cta-main">今すぐ無料診断する →</a>
+          <a class="cta-sub">まず相談してみる</a>
+        </div>
+      </div>
+      <div class="right">
+        <div class="blob"></div>
+        <div class="pills">
+          <div class="pill"><div class="pill-dot"></div>相談料 完全無料</div>
+          <div class="pill"><div class="pill-dot"></div>公務員専門の相談窓口</div>
+          <div class="pill"><div class="pill-dot"></div>オンライン対応OK</div>
+        </div>
+        <div class="stats">
+          <div class="stat-box"><div class="stat-num">500+</div><div class="stat-label">相談実績</div></div>
+          <div class="stat-box"><div class="stat-num">98%</div><div class="stat-label">満足度</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="section-block">
+      <div class="sec-title" style="font-size:22px">4つの領域をワンストップでサポート</div>
+      <div class="grid-4">
+        <div class="feat-card"><div class="feat-tag">保険</div><div class="feat-title" style="font-size:15px">保険の見直し</div><div class="feat-desc">共済との重複を確認し、本当に必要な保障だけに最適化。</div></div>
+        <div class="feat-card"><div class="feat-tag">資産形成</div><div class="feat-title" style="font-size:15px">NISA/iDeCo</div><div class="feat-desc">公務員向けiDeCoの活用法からつみたてNISAの設定まで。</div></div>
+        <div class="feat-card"><div class="feat-tag">退職金</div><div class="feat-title" style="font-size:15px">退職金・共済</div><div class="feat-desc">退職金の最適な受け取り方・共済年金との組み合わせ。</div></div>
+        <div class="feat-card"><div class="feat-tag">ライフ</div><div class="feat-title" style="font-size:15px">ライフプラン</div><div class="feat-desc">住宅購入・教育費・老後資金を総合的に考えたプラン。</div></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="label">大型ヒーロー＋統計バッジでインパクト最大化</span>
+      <div class="check">✓</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="submit-area">
+  <div class="selected-label" id="selected-label">カードをクリックして選択してください</div>
+</div>
+
+<script>
+let selected = null;
+function select(choice) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('card-' + choice).classList.add('selected');
+  selected = choice;
+  const labels = { a: 'A: フォント・スペーシング強化のみ', b: 'B: ヒーロー2カラム化（推奨）', c: 'C: フルPC刷新（大型ヒーロー）' };
+  document.getElementById('selected-label').textContent = '選択中: ' + labels[choice];
+  // notify parent if in iframe / superpowers context
+  try { window.parent.postMessage({type:'choice',choice}, '*'); } catch(e){}
+}
+</script>
+</body>
+</html>

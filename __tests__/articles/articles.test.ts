@@ -7,16 +7,12 @@ const mockFs = fs as jest.Mocked<typeof fs>
 const SAMPLE_MDX = `---
 title: "共済と民間保険の違い"
 description: "公務員が知るべき保険の基礎知識"
-tags: ["30代", "新婚・子育て"]
-publishedAt: "2026-05-10"
 ---
 本文テキスト`
 
 const SAMPLE_MDX_2 = `---
 title: "つみたてNISAの始め方"
 description: "公務員向けNISA活用ガイド"
-tags: ["20代"]
-publishedAt: "2026-05-09"
 ---
 本文テキスト2`
 
@@ -53,13 +49,7 @@ describe('getAllArticles', () => {
     expect(article.slug).toBe('kyosai-vs-private')
     expect(article.category).toBe('insurance')
     expect(article.title).toBe('共済と民間保険の違い')
-    expect(article.tags).toEqual(['30代', '新婚・子育て'])
-    expect(article.publishedAt).toBe('2026-05-10')
-  })
-
-  test('publishedAt の降順で並ぶ', async () => {
-    const articles = await getAllArticles()
-    expect(articles[0].publishedAt >= articles[1].publishedAt).toBe(true)
+    expect(article.description).toBe('公務員が知るべき保険の基礎知識')
   })
 })
 

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Zen Kaku Gothic New', sans-serif; background: #1a1a2e; padding: 32px 24px; color: #fff; }
+h1 { font-size: 20px; font-weight: 900; text-align: center; margin-bottom: 6px; }
+.subtitle { font-size: 13px; color: #aaa; text-align: center; margin-bottom: 32px; }
+
+.options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+.option {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 0.2s, transform 0.2s;
+  color: #222;
+}
+.option:hover { transform: translateY(-4px); border-color: #43a047; }
+.option.selected { border-color: #43a047; box-shadow: 0 0 0 4px rgba(67,160,71,0.3); }
+
+.opt-label {
+  background: #1b5e20;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.opt-label .letter {
+  background: #fff;
+  color: #1b5e20;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; flex-shrink: 0;
+}
+
+.hero-block {
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  padding: 48px 40px 52px;
+  min-height: 300px;
+}
+.blob {
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 380px; height: 400px;
+  background: linear-gradient(145deg, #b2dfdb, #a5d6a7);
+  border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
+  opacity: 0.9;
+}
+.eyebrow {
+  font-size: 11px; font-weight: 700; color: #43a047;
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.line { width: 36px; height: 3px; background: linear-gradient(90deg,#43a047,#66bb6a); border-radius: 2px; margin: 18px 0; }
+.desc { font-size: 14px; color: #555; line-height: 1.85; margin-bottom: 24px; max-width: 90%; }
+.ctas { display: flex; gap: 14px; align-items: center; }
+.btn-p { background: #1b5e20; color: #fff; font-size: 14px; font-weight: 900; padding: 14px 24px; border-radius: 30px; white-space: nowrap; }
+.btn-g { border: 1.5px solid rgba(46,125,50,0.3); color: #2e7d32; font-size: 13px; font-weight: 700; padding: 12px 20px; border-radius: 30px; white-space: nowrap; }
+
+/* 各パターンのタイトル */
+.content { position: relative; z-index: 2; max-width: 58%; }
+
+/* A: 現状 3行（バランス悪い） */
+.title-a { font-size: 46px; font-weight: 900; color: #1b5e20; line-height: 1.38; }
+
+/* B: 2行にまとめる */
+.title-b { font-size: 46px; font-weight: 900; color: #1b5e20; line-height: 1.38; }
+
+/* C: 「まるごと。」を強調して独立 */
+.title-c { font-size: 46px; font-weight: 900; color: #1b5e20; line-height: 1.38; }
+.title-c .accent { color: #43a047; font-size: 56px; display: block; }
+
+.opt-footer {
+  background: #f5f5f5;
+  padding: 12px 20px;
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.check { width: 22px; height: 22px; border: 2px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.option.selected .check { background: #43a047; border-color: #43a047; color: #fff; }
+
+.selected-label { text-align: center; margin-top: 24px; font-size: 14px; color: #aaa; }
+</style>
+</head>
+<body>
+
+<h1>ヒーロータイトル — 改行バランス調整</h1>
+<p class="subtitle">「まるごと。」が短すぎる問題を3パターンで検討</p>
+
+<div class="options">
+
+  <!-- A: 2行（シンプルにまとめる） -->
+  <div class="option" id="opt-a" onclick="sel('a')">
+    <div class="opt-label"><div class="letter">A</div>2行にまとめる</div>
+    <div class="hero-block">
+      <div class="blob"></div>
+      <div class="content">
+        <div class="eyebrow">Money Consultation for Civil Servants</div>
+        <div class="title-a">公務員のお金の<br>相談、まるごと。</div>
+        <div class="line"></div>
+        <p class="desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
+        <div class="ctas">
+          <span class="btn-p">今すぐ無料診断する →</span>
+          <span class="btn-g">まず相談してみる</span>
+        </div>
+      </div>
+    </div>
+    <div class="opt-footer">各行のボリュームが均等<div class="check">✓</div></div>
+  </div>
+
+  <!-- B: 3行・行末をそろえる -->
+  <div class="option" id="opt-b" onclick="sel('b')">
+    <div class="opt-label"><div class="letter">B</div>3行・行頭をそろえる</div>
+    <div class="hero-block">
+      <div class="blob"></div>
+      <div class="content">
+        <div class="eyebrow">Money Consultation for Civil Servants</div>
+        <div class="title-b">公務員の方の、<br>お金の相談を、<br>まるごと。</div>
+        <div class="line"></div>
+        <p class="desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
+        <div class="ctas">
+          <span class="btn-p">今すぐ無料診断する →</span>
+          <span class="btn-g">まず相談してみる</span>
+        </div>
+      </div>
+    </div>
+    <div class="opt-footer">各行の文字数バランスを均等に<div class="check">✓</div></div>
+  </div>
+
+  <!-- C: まるごと。を大きく独立 -->
+  <div class="option" id="opt-c" onclick="sel('c')">
+    <div class="opt-label"><div class="letter">C</div>「まるごと。」を大きく強調</div>
+    <div class="hero-block">
+      <div class="blob"></div>
+      <div class="content">
+        <div class="eyebrow">Money Consultation for Civil Servants</div>
+        <div class="title-c">公務員の方、<br>お金の相談を<span class="accent">まるごと。</span></div>
+        <div class="line"></div>
+        <p class="desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
+        <div class="ctas">
+          <span class="btn-p">今すぐ無料診断する →</span>
+          <span class="btn-g">まず相談してみる</span>
+        </div>
+      </div>
+    </div>
+    <div class="opt-footer">「まるごと。」をグリーンで差別化<div class="check">✓</div></div>
+  </div>
+
+</div>
+
+<div class="selected-label" id="sel-label">クリックして選択 / またはターミナルで教えてください</div>
+
+<script>
+function sel(c) {
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.getElementById('opt-'+c).classList.add('selected');
+  const l = {a:'A: 2行にまとめる', b:'B: 3行・行頭をそろえる', c:'C: まるごと。を大きく強調'};
+  document.getElementById('sel-label').textContent = '選択中: ' + l[c];
+  try { window.parent.postMessage({type:'choice',choice:c},'*'); } catch(e){}
+}
+</script>
+</body>
+</html>

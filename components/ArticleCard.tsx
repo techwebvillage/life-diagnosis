@@ -21,14 +21,6 @@ export default function ArticleCard({ article }: Props) {
         {article.title}
       </h2>
       <p className="mt-2 text-sm text-gray-500 line-clamp-2">{article.description}</p>
-      <div className="mt-3 flex flex-wrap gap-1">
-        {article.tags.map((tag) => (
-          <span key={tag} className="text-xs text-green-600 bg-green-50 rounded-full px-2 py-0.5">
-            {tag}
-          </span>
-        ))}
-      </div>
-      <p className="mt-3 text-xs text-gray-400">{article.publishedAt}</p>
     </Link>
   )
 }

@@ -276,6 +276,9 @@ button { cursor: pointer; font-family: inherit; border: none; }
   font-size: 11px;
   color: var(--text-muted);
 }
+.hero__title--accent {
+  color: var(--green-vivid);
+}
 
 /* ── 課題提起セクション ── */
 .worries__deco-1 {
@@ -787,44 +790,90 @@ button { cursor: pointer; font-family: inherit; border: none; }
 @media (min-width: 1200px) {
   body { font-size: 16px; }
 
+  /* ナビ */
+  .nav        { padding: 16px max(24px, calc(50% - 700px)); }
+  .nav__logo  { font-size: 22px; }
+  .nav__cta   { font-size: 14px; padding: 13px 26px; }
+
+  /* ヒーロー */
   .hero {
-    min-height: 700px;
+    min-height: 720px;
     padding: 96px max(80px, calc(50% - 700px)) 96px;
   }
-  .hero__title   { font-size: 48px; }
-  .hero__content { max-width: 46%; }
-  .hero__blob--1 { width: 620px; height: 640px; right: -100px; }
-  .hero__pill    { font-size: 14px; }
-  .hero__pill--1 { top: 110px; right: max(80px, calc(50% - 700px)); }
-  .hero__pill--2 { top: 168px; right: calc(max(80px, calc(50% - 700px)) + 16px); }
-  .hero__pill--3 { top: 226px; right: max(80px, calc(50% - 700px)); }
+  .hero__content          { max-width: 52%; }
+  .hero__eyebrow          { font-size: 12px; }
+  .hero__title            { font-size: 62px; }
+  .hero__desc             { font-size: 17px; }
+  .hero__ctas             { flex-direction: row; align-items: center; }
+  .hero__note             { font-size: 13px; }
+  .hero__blob--1          { width: 620px; height: 640px; right: -100px; }
+  .hero__pill             { font-size: 15px; padding: 12px 24px; }
+  .hero__pill--1          { top: 110px; right: max(80px, calc(50% - 700px)); }
+  .hero__pill--2          { top: 168px; right: calc(max(80px, calc(50% - 700px)) + 16px); }
+  .hero__pill--3          { top: 226px; right: max(80px, calc(50% - 700px)); }
 
-  .section  { padding: 96px max(80px, calc(50% - 700px)); }
-  .nav      { padding: 14px max(24px, calc(50% - 700px)); }
+  /* ボタン */
+  .btn-primary { font-size: 16px; padding: 16px 34px; }
+  .btn-ghost   { font-size: 15px; padding: 14px 28px; }
 
-  .features__grid { grid-template-columns: repeat(4, 1fr); }
-  .flow__steps    { max-width: 800px; margin: 0 auto; }
+  /* セクション共通 */
+  .section   { padding: 96px max(80px, calc(50% - 700px)); }
+  .sec-label { font-size: 12px; }
+  .sec-title { font-size: 34px; }
+  .sec-desc  { font-size: 16px; }
 
+  /* 課題グリッド（4列化） */
+  .worries-grid { grid-template-columns: repeat(4, 1fr); }
+  .worry-card p  { font-size: 14px; }
+  .worries-lead  { font-size: 17px; }
+
+  /* サービス概要 */
+  .features__grid  { grid-template-columns: repeat(4, 1fr); }
+  .features__card  { padding: 28px 24px; }
+  .features__title { font-size: 16px; }
+  .features__desc  { font-size: 13px; }
+
+  /* 公務員特化の理由 */
   .reasons-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+  .reason-title { font-size: 18px; }
+  .reason-desc  { font-size: 15px; }
 
-  .cta      { padding: 64px 80px; }
-  .cta-wrap { padding: 80px max(80px, calc(50% - 700px)); }
-  .cta__btns { flex-direction: row; }
-  .cta__btn-primary { flex: 1; }
-  .cta__btn-ghost   { flex: 1; }
+  /* フロー */
+  .flow__steps { max-width: 800px; margin: 0 auto; }
+  .flow__body  { padding: 20px 24px; }
+  .flow__title { font-size: 17px; }
+  .flow__desc  { font-size: 14px; }
 
-  .footer { padding: 60px max(80px, calc(50% - 700px)) 40px; }
+  /* FAQ */
+  .faq-item summary { font-size: 17px; }
+  .faq-item p       { font-size: 15px; }
+
+  /* CTA */
+  .cta-wrap           { padding: 80px max(80px, calc(50% - 700px)); }
+  .cta                { padding: 64px 80px; }
+  .cta__title         { font-size: 32px; }
+  .cta__checks li     { font-size: 16px; }
+  .cta__btns          { flex-direction: row; }
+  .cta__btn-primary   { flex: 1; font-size: 17px; padding: 20px; }
+  .cta__btn-ghost     { flex: 1; font-size: 15px; padding: 17px; }
+
+  /* フッター */
+  .footer          { padding: 60px max(80px, calc(50% - 700px)) 40px; }
+  .footer__logo    { font-size: 22px; }
+  .footer__tagline { font-size: 14px; }
+  .footer__links a { font-size: 14px; }
+  .footer__copy    { font-size: 13px; }
 }
   </style>
 </head>
 <body>
   <header class="nav">
     <div class="nav__logo">Life <span>Village</span></div>
-    <a href="https://life.tech-village.co.jp/diagnosis" class="btn-primary nav__cta">無料診断を始める →</a>
+    <a href="https://life-diagnosis.vercel.app/diagnosis" class="btn-primary nav__cta" target="_blank" rel="noopener noreferrer">無料診断を始める →</a>
   </header>
 
   <!-- ① ヒーロー -->
@@ -845,12 +894,12 @@ button { cursor: pointer; font-family: inherit; border: none; }
 
     <div class="hero__content">
       <span class="hero__eyebrow">Money Consultation for Civil Servants</span>
-      <h1 class="hero__title">公務員の方、<br>お金の相談、<br>まるごと。</h1>
+      <h1 class="hero__title">公務員の方、<br>お金の相談を<br><span class="hero__title--accent">まるごと。</span></h1>
       <div class="hero__line"></div>
       <p class="hero__desc">保険・NISA・退職金・住宅購入…公務員ならではのお金の悩みを、共済制度を知り尽くした専門家がまとめて解決します。</p>
       <div class="hero__ctas">
-        <a href="https://life.tech-village.co.jp/diagnosis" class="btn-primary">今すぐ無料診断する →</a>
-        <a href="https://life.tech-village.co.jp/consultation/" class="btn-ghost">まず相談してみる</a>
+        <a href="https://life-diagnosis.vercel.app/diagnosis" class="btn-primary" target="_blank" rel="noopener noreferrer">今すぐ無料診断する →</a>
+        <a href="https://forms.gle/bd7y9u5ZhZdqqrTS9" class="btn-ghost" target="_blank" rel="noopener noreferrer">まず相談してみる</a>
       </div>
       <p class="hero__note">ご相談・ご診断はすべて無料です</p>
     </div>
@@ -997,7 +1046,7 @@ button { cursor: pointer; font-family: inherit; border: none; }
     <div class="faq-list">
       <details class="faq-item glass-card">
         <summary>本当に無料ですか？</summary>
-        <p>はい、完全無料です。相談料・診断料は一切かかりません。収益は保険・金融商品の販売手数料・アフィリエイトで成り立っています。ご加入いただかなくても費用は発生しません。</p>
+        <p>はい、完全無料です。相談料・診断料は一切かかりません。</p>
       </details>
       <details class="faq-item glass-card">
         <summary>保険以外の相談もできますか？</summary>
@@ -1009,7 +1058,7 @@ button { cursor: pointer; font-family: inherit; border: none; }
       </details>
       <details class="faq-item glass-card">
         <summary>オンラインで相談できますか？</summary>
-        <p>はい、Zoom・LINEビデオ通話など、オンラインでのご相談に対応しています。全国どこからでもご利用いただけます。</p>
+        <p>はい、オンラインでのご相談に対応しています。全国どこからでもご利用いただけます。</p>
       </details>
     </div>
   </section>
@@ -1027,8 +1076,8 @@ button { cursor: pointer; font-family: inherit; border: none; }
         <li><span class="cta__check-icon">安心</span>無理な勧誘は一切ありません</li>
       </ul>
       <div class="cta__btns">
-        <a href="https://life.tech-village.co.jp/diagnosis" class="cta__btn-primary">今すぐ無料診断する →</a>
-        <a href="https://life.tech-village.co.jp/consultation/" class="cta__btn-ghost">まず相談してみる</a>
+        <a href="https://life-diagnosis.vercel.app/diagnosis" class="cta__btn-primary" target="_blank" rel="noopener noreferrer">今すぐ無料診断する →</a>
+        <a href="https://forms.gle/bd7y9u5ZhZdqqrTS9" class="cta__btn-ghost" target="_blank" rel="noopener noreferrer">まず相談してみる</a>
       </div>
     </div>
   </section>
@@ -1038,8 +1087,8 @@ button { cursor: pointer; font-family: inherit; border: none; }
     <p class="footer__tagline">公務員専門マネー相談窓口</p>
     <hr class="footer__divider">
     <nav class="footer__links" aria-label="フッターナビゲーション">
-      <a href="https://life.tech-village.co.jp/diagnosis">無料診断を始める</a>
-      <a href="https://life.tech-village.co.jp/consultation/">無料で相談する</a>
+      <a href="https://life-diagnosis.vercel.app/diagnosis" target="_blank" rel="noopener noreferrer">無料診断を始める</a>
+      <a href="https://forms.gle/bd7y9u5ZhZdqqrTS9" target="_blank" rel="noopener noreferrer">無料で相談する</a>
       <a href="https://tech-village.co.jp/" target="_blank" rel="noopener noreferrer">運営会社</a>
     </nav>
     <p class="footer__copy">© Life Village All Rights Reserved.</p>
