@@ -9,8 +9,8 @@ const articlesDir = path.join(process.cwd(), 'content', 'articles')
 function parseMdx(raw: string): { title: string; description: string; content: string } {
   const lines = raw.split('\n')
   const title = lines[0]?.trim() ?? ''
-  const description = lines[1]?.trim() ?? ''
-  const content = lines.slice(2).join('\n').trimStart()
+  const description = lines[2]?.trim() ?? ''
+  const content = lines.slice(3).join('\n').trimStart()
   return { title, description, content }
 }
 

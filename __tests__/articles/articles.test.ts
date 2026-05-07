@@ -5,11 +5,13 @@ jest.mock('fs')
 const mockFs = fs as jest.Mocked<typeof fs>
 
 const SAMPLE_MDX = `共済と民間保険の違い
+
 公務員が知るべき保険の基礎知識
 
 本文テキスト`
 
 const SAMPLE_MDX_2 = `つみたてNISAの始め方
+
 公務員向けNISA活用ガイド
 
 本文テキスト2`
