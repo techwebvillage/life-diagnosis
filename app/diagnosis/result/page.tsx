@@ -1,12 +1,14 @@
 // app/diagnosis/result/page.tsx
 
-import type { DiagnosisType } from '@/lib/diagnosis/types'
-import { VALID_TYPES, DEFAULT_TYPE } from '@/lib/diagnosis/types'
+import type { DiagnosisType, DiagnosisKeyword } from '@/lib/diagnosis/types'
+import { VALID_TYPES, DEFAULT_TYPE, KEYWORD_TO_TYPE } from '@/lib/diagnosis/types'
 import ResultCard from '@/components/diagnosis/ResultCard'
 
 const CONSULTATION_URL =
   process.env.NEXT_PUBLIC_CONSULTATION_URL ?? 'https://life.tech-village.co.jp/consultation/'
-const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL ?? 'https://lin.ee/XXXXXXX'
+const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL ?? 'https://lin.ee/XTFxWwZ'
+
+const VALID_KEYWORDS: DiagnosisKeyword[] = ['I', 'A', 'P', 'L']
 
 type Props = {
   searchParams: Promise<{ type?: string }>
@@ -15,10 +17,13 @@ type Props = {
 export default async function ResultPage({ searchParams }: Props) {
   const params = await searchParams
   const rawType = params.type?.toUpperCase()
-  const type: DiagnosisType =
-    rawType && (VALID_TYPES as string[]).includes(rawType)
-      ? (rawType as DiagnosisType)
-      : DEFAULT_TYPE
+
+  let type: DiagnosisType = DEFAULT_TYPE
+  if (rawType && (VALID_TYPES as string[]).includes(rawType)) {
+    type = rawType as DiagnosisType
+  } else if (rawType && (VALID_KEYWORDS as string[]).includes(rawType)) {
+    type = KEYWORD_TO_TYPE[rawType as DiagnosisKeyword]
+  }
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-12">

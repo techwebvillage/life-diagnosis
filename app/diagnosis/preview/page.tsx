@@ -2,11 +2,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import type { DiagnosisType } from '@/lib/diagnosis/types'
-import { DEFAULT_TYPE, VALID_TYPES } from '@/lib/diagnosis/types'
+import { VALID_TYPES, TYPE_TO_KEYWORD } from '@/lib/diagnosis/types'
 
-const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL ?? 'https://lin.ee/XXXXXXX'
+const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL ?? 'https://lin.ee/XTFxWwZ'
 const STORAGE_KEY = 'lv_quiz_result'
 
 type QuizResult = {
@@ -14,7 +13,6 @@ type QuizResult = {
 }
 
 export default function PreviewPage() {
-  const router = useRouter()
   const [result, setResult] = useState<QuizResult | null>(null)
 
   useEffect(() => {
@@ -35,10 +33,7 @@ export default function PreviewPage() {
     }
   }, [])
 
-  function handleViewResult() {
-    const type = result?.type ?? DEFAULT_TYPE
-    router.push(`/diagnosis/result?type=${type}`)
-  }
+  const keyword = result ? TYPE_TO_KEYWORD[result.type] : null
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
@@ -62,35 +57,60 @@ export default function PreviewPage() {
             backdropFilter: 'blur(14px)',
           }}
         >
-          {result === null ? (
+          {result === null || keyword === null ? (
             <div className="text-center py-8 text-sm" style={{ color: '#888' }}>
               読み込み中...
             </div>
           ) : (
             <>
-              <div className="mb-6">
-                <p className="text-sm text-center font-bold mb-3" style={{ color: '#1b5e20' }}>
-                  LINEで詳細な診断結果を受け取る
+              <div className="text-center mb-6">
+                <p className="text-xs mb-3" style={{ color: '#666' }}>
+                  あなたの診断キーワード
                 </p>
-                <a
-                  href={LINE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full text-center py-3 rounded-xl font-bold text-sm text-white transition-opacity hover:opacity-90"
-                  style={{ background: '#06c755' }}
+                <div
+                  className="inline-flex items-center justify-center w-28 h-28 rounded-full text-white text-6xl font-black shadow-lg"
+                  style={{ background: 'linear-gradient(135deg, #1b5e20, #2e7d32)' }}
                 >
-                  LINEで結果を受け取る →
-                </a>
-                <p className="text-xs text-center mt-2" style={{ color: '#888' }}>
-                  ※ 無料・迷惑メールなし
+                  {keyword}
+                </div>
+                <p className="text-xs mt-3" style={{ color: '#666' }}>
+                  このアルファベットをLINEに送ってください
                 </p>
               </div>
 
-              <div className="border-t my-4" style={{ borderColor: 'rgba(27,94,32,0.12)' }} />
+              <div
+                className="rounded-xl p-4 mb-5 text-sm leading-relaxed"
+                style={{ background: 'rgba(27,94,32,0.06)', color: '#444' }}
+              >
+                <p className="font-bold mb-2" style={{ color: '#1b5e20' }}>
+                  受け取り方
+                </p>
+                <ol className="space-y-1 list-none">
+                  <li>① 下のボタンからLINE友だち追加</li>
+                  <li>
+                    ② LINEに上のアルファベット（
+                    <span className="font-black" style={{ color: '#1b5e20' }}>
+                      {keyword}
+                    </span>
+                    ）を送信
+                  </li>
+                  <li>③ 診断結果URLが届きます</li>
+                </ol>
+              </div>
 
-              <button onClick={handleViewResult} className="btn-primary w-full py-4 text-sm">
-                診断結果を見る →
-              </button>
+              <a
+                href={LINE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LINEで診断結果を受け取る（外部リンク）"
+                className="block w-full text-center py-4 rounded-xl font-bold text-base text-white active:scale-95 transition-all"
+                style={{ background: '#06c755' }}
+              >
+                LINEで結果を受け取る →
+              </a>
+              <p className="text-xs text-center mt-2" style={{ color: '#888' }}>
+                ※ 無料・迷惑メールなし
+              </p>
             </>
           )}
         </div>

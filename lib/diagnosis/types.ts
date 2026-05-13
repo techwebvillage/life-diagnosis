@@ -63,3 +63,19 @@ export const DIAGNOSIS_TYPES: Record<DiagnosisType, DiagnosisTypeContent> = {
 
 export const VALID_TYPES: DiagnosisType[] = ['INSURANCE', 'ASSET', 'PENSION', 'LIFEPLAN']
 export const DEFAULT_TYPE: DiagnosisType = 'LIFEPLAN'
+
+export type DiagnosisKeyword = 'I' | 'A' | 'P' | 'L'
+
+export const TYPE_TO_KEYWORD: Record<DiagnosisType, DiagnosisKeyword> = {
+  INSURANCE: 'I',
+  ASSET: 'A',
+  PENSION: 'P',
+  LIFEPLAN: 'L',
+}
+
+export const KEYWORD_TO_TYPE: Record<DiagnosisKeyword, DiagnosisType> = {
+  I: 'INSURANCE',
+  A: 'ASSET',
+  P: 'PENSION',
+  L: 'LIFEPLAN',
+}
