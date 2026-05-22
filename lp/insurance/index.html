@@ -950,6 +950,77 @@ button { cursor: pointer; font-family: inherit; border: none; }
   max-width: 1080px;
   margin: 0 auto;
 }
+/* === insurance LP: 共済 vs 民間 比較表 === */
+.compare-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  padding: 0;
+}
+.compare-table thead th {
+  background: var(--green-forest);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 16px 12px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.compare-table tbody th {
+  background: var(--green-softest);
+  color: var(--green-deep);
+  font-weight: 700;
+  padding: 16px 12px;
+  text-align: left;
+  font-size: 14px;
+  width: 22%;
+}
+.compare-table tbody td {
+  padding: 16px 12px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  font-size: 14px;
+  color: var(--text-main);
+  line-height: 1.55;
+  text-align: center;
+  vertical-align: middle;
+}
+.compare-table tbody tr:first-child td,
+.compare-table tbody tr:first-child th { border-top: none; }
+.compare-low {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--green-pale);
+  color: var(--green-deep);
+  font-weight: 700;
+  font-size: 13px;
+}
+.compare-mid {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #fff4cc;
+  color: #8a6d00;
+  font-weight: 700;
+  font-size: 13px;
+}
+.compare-note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-sub);
+  text-align: center;
+  line-height: 1.7;
+}
+@media (max-width: 640px) {
+  .compare-table thead th,
+  .compare-table tbody th,
+  .compare-table tbody td { padding: 12px 8px; font-size: 12px; }
+}
   </style>
 </head>
 <body>
@@ -1066,31 +1137,42 @@ button { cursor: pointer; font-family: inherit; border: none; }
   <section class="section section--reasons">
     <div class="deco-circle reasons__deco-1" aria-hidden="true"></div>
     <div class="deco-circle reasons__deco-2" aria-hidden="true"></div>
-    <span class="sec-label">Why Life Village</span>
-    <div class="sec-title">一般のFP相談と<br>何が違うのか</div>
+    <span class="sec-label">Benefit</span>
+    <div class="sec-title">公務員共済 vs 民間保険<br>本当に必要な保障は？</div>
     <div class="sec-line"></div>
-    <div class="reasons-list">
-      <article class="glass-card reason-card">
-        <div class="reason-header">
-          <div class="reason-num">01</div>
-          <div class="reason-title">共済制度を熟知した提案</div>
-        </div>
-        <p class="reason-desc">一般の相談窓口では見落としがちな共済の保障内容を把握した上で、重複なく最適な設計をご提案します。</p>
-      </article>
-      <article class="glass-card reason-card">
-        <div class="reason-header">
-          <div class="reason-num">02</div>
-          <div class="reason-title">公務員向け制度に精通</div>
-        </div>
-        <p class="reason-desc">iDeCoの活用法、公務員向け住宅ローン優遇など、公務員特有の制度知識を持つ専門家が対応します。</p>
-      </article>
-      <article class="glass-card reason-card">
-        <div class="reason-header">
-          <div class="reason-num">03</div>
-          <div class="reason-title">職種・年代・家族構成に合わせた個別相談</div>
-        </div>
-        <p class="reason-desc">教員・地方公務員・国家公務員など職種によって制度が異なります。あなたの状況に最適なプランをご提案します。</p>
-      </article>
+    <div class="compare-wrap">
+      <table class="compare-table glass-card">
+        <thead>
+          <tr>
+            <th>保障領域</th>
+            <th>公務員共済</th>
+            <th>民間保険の必要度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>医療費</th>
+            <td>高額療養費 + 付加給付<br>（自己負担 月25,000円程度〜）</td>
+            <td><span class="compare-low">最低限でOK</span></td>
+          </tr>
+          <tr>
+            <th>死亡保障</th>
+            <td>遺族共済年金<br>（家族構成により変動）</td>
+            <td><span class="compare-mid">家族構成次第</span></td>
+          </tr>
+          <tr>
+            <th>がん・先進医療</th>
+            <td>付加給付で大半カバー</td>
+            <td><span class="compare-mid">特約は精査が必要</span></td>
+          </tr>
+          <tr>
+            <th>就業不能</th>
+            <td>傷病手当金 + 互助会給付</td>
+            <td><span class="compare-low">最低限でOK</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="compare-note">※ 給付額・対象は職種（教員／地方／国家／みなし）と共済組合により異なります。実際の保障内容は無料相談で個別にご確認ください。</p>
     </div>
   </section>
 
